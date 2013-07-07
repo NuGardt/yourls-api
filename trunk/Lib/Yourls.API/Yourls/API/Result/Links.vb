@@ -19,42 +19,187 @@ Imports System.Runtime.Serialization
 
 Namespace Yourls.API.Result
   ''' <summary>
-  ''' Link data.
+  ''' Link 'pseudo-arrray' data.
   ''' </summary>
   ''' <remarks></remarks>
-    <DataContract()>
+  <DataContract()>
   Public Class Links
     'Since YOURLS outputs 'numbered objects' we have to do this. Would have been nicer to parse this as an array of objects.
-    'Suggested improvement https://github.com/YOURLS/YOURLS/issues/1448
+    'Issue: NYA-7
 
+    ''' <summary>
+    ''' Link
+    ''' </summary>
+    ''' <remarks></remarks>
     <DataMember(Name := "link_1")>
     Public Link1() As LinkData
 
+    ''' <summary>
+    ''' Link
+    ''' </summary>
+    ''' <remarks></remarks>
     <DataMember(Name := "link_2")>
     Public Link2() As LinkData
 
+    ''' <summary>
+    ''' Link
+    ''' </summary>
+    ''' <remarks></remarks>
     <DataMember(Name := "link_3")>
     Public Link3() As LinkData
 
+    ''' <summary>
+    ''' Link
+    ''' </summary>
+    ''' <remarks></remarks>
     <DataMember(Name := "link_4")>
     Public Link4() As LinkData
 
+    ''' <summary>
+    ''' Link
+    ''' </summary>
+    ''' <remarks></remarks>
     <DataMember(Name := "link_5")>
     Public Link5() As LinkData
 
+    ''' <summary>
+    ''' Link
+    ''' </summary>
+    ''' <remarks></remarks>
     <DataMember(Name := "link_6")>
     Public Link6() As LinkData
 
+    ''' <summary>
+    ''' Link
+    ''' </summary>
+    ''' <remarks></remarks>
     <DataMember(Name := "link_7")>
     Public Link7() As LinkData
 
+    ''' <summary>
+    ''' Link
+    ''' </summary>
+    ''' <remarks></remarks>
     <DataMember(Name := "link_8")>
     Public Link8() As LinkData
 
+    ''' <summary>
+    ''' Link
+    ''' </summary>
+    ''' <remarks></remarks>
     <DataMember(Name := "link_9")>
     Public Link9() As LinkData
 
+    ''' <summary>
+    ''' Link
+    ''' </summary>
+    ''' <remarks></remarks>
     <DataMember(Name := "link_10")>
     Public Link10() As LinkData
+
+    ''' <summary>
+    ''' Link
+    ''' </summary>
+    ''' <remarks></remarks>
+    <DataMember(Name := "link_11")>
+    Public Link11() As LinkData
+
+    ''' <summary>
+    ''' Link
+    ''' </summary>
+    ''' <remarks></remarks>
+    <DataMember(Name := "link_12")>
+    Public Link12() As LinkData
+
+    ''' <summary>
+    ''' Link
+    ''' </summary>
+    ''' <remarks></remarks>
+    <DataMember(Name := "link_13")>
+    Public Link13() As LinkData
+
+    ''' <summary>
+    ''' Link
+    ''' </summary>
+    ''' <remarks></remarks>
+    <DataMember(Name := "link_14")>
+    Public Link14() As LinkData
+
+    ''' <summary>
+    ''' Link
+    ''' </summary>
+    ''' <remarks></remarks>
+    <DataMember(Name := "link_15")>
+    Public Link15() As LinkData
+
+    ''' <summary>
+    ''' Link
+    ''' </summary>
+    ''' <remarks></remarks>
+    <DataMember(Name := "link_16")>
+    Public Link16() As LinkData
+
+    ''' <summary>
+    ''' Link
+    ''' </summary>
+    ''' <remarks></remarks>
+    <DataMember(Name := "link_17")>
+    Public Link17() As LinkData
+
+    ''' <summary>
+    ''' Link
+    ''' </summary>
+    ''' <remarks></remarks>
+    <DataMember(Name := "link_18")>
+    Public Link18() As LinkData
+
+    ''' <summary>
+    ''' Link
+    ''' </summary>
+    ''' <remarks></remarks>
+    <DataMember(Name := "link_19")>
+    Public Link19() As LinkData
+
+    ''' <summary>
+    ''' Link
+    ''' </summary>
+    ''' <remarks></remarks>
+    <DataMember(Name := "link_20")>
+    Public Link20() As LinkData
+
+    ''' <summary>
+    ''' Link
+    ''' </summary>
+    ''' <remarks></remarks>
+    <DataMember(Name := "link_21")>
+    Public Link21() As LinkData
+
+    ''' <summary>
+    ''' Link
+    ''' </summary>
+    ''' <remarks></remarks>
+    <DataMember(Name := "link_22")>
+    Public Link22() As LinkData
+
+    ''' <summary>
+    ''' Link
+    ''' </summary>
+    ''' <remarks></remarks>
+    <DataMember(Name := "link_23")>
+    Public Link23() As LinkData
+
+    ''' <summary>
+    ''' Link
+    ''' </summary>
+    ''' <remarks></remarks>
+    <DataMember(Name := "link_24")>
+    Public Link24() As LinkData
+
+    ''' <summary>
+    ''' Link
+    ''' </summary>
+    ''' <remarks></remarks>
+    <DataMember(Name := "link_25")>
+    Public Link25() As LinkData
   End Class
 End Namespace

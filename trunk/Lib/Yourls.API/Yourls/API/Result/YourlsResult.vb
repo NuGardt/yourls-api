@@ -22,18 +22,34 @@ Namespace Yourls.API.Result
   ''' YOURLS API response.
   ''' </summary>
   ''' <remarks></remarks>
-    <DataContract()>
+  <DataContract()>
   Public Class YourlsResult
-    <DataMember(Name := "message")>
+    ''' <summary>
+    ''' Returns or sets the message of the API call.
+    ''' </summary>
+    ''' <remarks></remarks>
+    <DataMember(Name:="message")>
     Public Message As String
 
-    <DataMember(Name := "statusCode")>
+    ''' <summary>
+    ''' Returns or sets the status code of the API call. 200 = OK
+    ''' </summary>
+    ''' <remarks></remarks>
+    <DataMember(Name:="statusCode")>
     Public StatusCode As Int32
 
-    <DataMember(Name := "errorCode")>
+    ''' <summary>
+    ''' Returns or sets the error code of the API call.
+    ''' </summary>
+    ''' <remarks></remarks>
+    <DataMember(Name:="errorCode")>
     Public ErrorCode As Int32
 
-    <DataMember(Name := "callback")>
+    ''' <summary>
+    ''' Returns or sets the callback of the API call.
+    ''' </summary>
+    ''' <remarks></remarks>
+    <DataMember(Name:="callback")>
     Public Callback As String
   End Class
 End Namespace

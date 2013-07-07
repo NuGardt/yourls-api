@@ -22,7 +22,7 @@ Namespace Yourls.API.Result
   ''' YOURLS API response.
   ''' </summary>
   ''' <remarks></remarks>
-    <DataContract()>
+  <DataContract()>
   Public Class YourlsExpandShortUrlResult
     Inherits YourlsResult
 
@@ -42,12 +42,24 @@ Namespace Yourls.API.Result
     '"callback":""
     '}
 
+    ''' <summary>
+    ''' Returns the keyword of the short link.
+    ''' </summary>
+    ''' <remarks></remarks>
     <DataMember(Name := "keyword")>
     Public Keyword As String
 
+    ''' <summary>
+    ''' Returns the short URL.
+    ''' </summary>
+    ''' <remarks></remarks>
     <DataMember(Name := "shorturl")>
     Public ShortUrl As String
 
+    ''' <summary>
+    ''' Returns the long URL.
+    ''' </summary>
+    ''' <remarks></remarks>
     <DataMember(Name := "longurl")>
     Public LongUrl As String
   End Class

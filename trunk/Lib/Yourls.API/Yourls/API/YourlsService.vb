@@ -27,10 +27,14 @@ Imports System.Web
 
 Namespace Yourls.API
   ''' <summary>
-  ''' Class contains synchronous and asynchronous API call function.
+  ''' Class contains synchronous and asynchronous YOURLS API call functions.
   ''' </summary>
   ''' <remarks></remarks>
-    Public Class YourlsService
+  Public Class YourlsService
+    ''' <summary>
+    ''' Returns the YOURLS API URL.
+    ''' </summary>
+    ''' <remarks></remarks>
     Public ReadOnly ApiUrl As String
 
     Private Const ResponseFormat As String = "json"
@@ -42,8 +46,9 @@ Namespace Yourls.API
     Private Const ActionGetDatabaseStats As String = "db-stats"
 
     ''' <summary>
-    ''' Constructor
+    ''' Contructor
     ''' </summary>
+    ''' <param name="ApiUrl">The URL to your YOURLS API. Example: "http://yoursite.com/yourls-api.php"</param>
     ''' <remarks></remarks>
     Public Sub New(ByVal ApiUrl As String)
       Me.ApiUrl = ApiUrl
@@ -51,7 +56,17 @@ Namespace Yourls.API
 
 #Region "Function CreateShortUrl"
 
-    Public Function CreateShortUrl(ByVal Url As String,
+    ''' <summary>
+    ''' Create a short URL from your long URL.
+    ''' </summary>
+    ''' <param name="LongUrl">The long URL to shorten.</param>
+    ''' <param name="Authentication">Authentication details.</param>
+    ''' <param name="Result">Contains the result. Can be <c>Nothing</c>.</param>
+    ''' <param name="Keyword">Keyword to use for the short name.</param>
+    ''' <param name="Title">Title of the URL.</param>
+    ''' <returns>Returns an <c>System.Exception</c> if an error occurred otherwise <c>Nothing</c>.</returns>
+    ''' <remarks></remarks>
+    Public Function CreateShortUrl(ByVal LongUrl As String,
                                    ByVal Authentication As IYourlsAuthentication,
                                    <Out()> ByRef Result As YourlsCreateShortUrlResult,
                                    Optional ByVal Keyword As String = Nothing,
@@ -59,8 +74,8 @@ Namespace Yourls.API
       Result = Nothing
       Dim Ex As Exception = Nothing
 
-      If String.IsNullOrEmpty(Url) Then
-        Ex = New ArgumentNullException("Url")
+      If String.IsNullOrEmpty(LongUrl) Then
+        Ex = New ArgumentNullException("LongUrl")
       ElseIf (Authentication Is Nothing) Then
         Ex = New ArgumentNullException("Authentication")
       Else
@@ -69,7 +84,7 @@ Namespace Yourls.API
         Call SB.Append(Me.ApiUrl)
         Call SB.AppendFormat("?action={0}", ActionCreateShortUrl)
         Call SB.AppendFormat("&format={0}", ResponseFormat)
-        Call SB.AppendFormat("&url={0}", HttpUtility.UrlEncode(Url))
+        Call SB.AppendFormat("&url={0}", HttpUtility.UrlEncode(LongUrl))
 
         If (Not String.IsNullOrEmpty(Keyword)) Then Call SB.AppendFormat("&keyword={0}", HttpUtility.UrlEncode(Keyword))
         If (Not String.IsNullOrEmpty(Title)) Then Call SB.AppendFormat("&title={0}", HttpUtility.UrlEncode(Title))
@@ -82,14 +97,25 @@ Namespace Yourls.API
       Return Ex
     End Function
 
+    ''' <summary>
+    ''' Create a short URL from your long URL.
+    ''' </summary>
+    ''' <param name="Key">Your own Key for tracking asynchronous calls.</param>
+    ''' <param name="LongUrl">The long URL to shorten.</param>
+    ''' <param name="Authentication">Authentication details.</param>
+    ''' <param name="Callback">Method to call on completion or failure.</param>
+    ''' <param name="Keyword">Keyword to use for the short name.</param>
+    ''' <param name="Title">Title of the URL.</param>
+    ''' <returns>Returns an <c>System.IAsyncResult</c>.</returns>
+    ''' <remarks></remarks>
     Public Function CreateShortUrlBegin(ByVal Key As Object,
-                                        ByVal Url As String,
+                                        ByVal LongUrl As String,
                                         ByVal Authentication As IYourlsAuthentication,
                                         ByVal Callback As AsyncCallback,
                                         Optional ByVal Keyword As String = Nothing,
                                         Optional ByVal Title As String = Nothing) As IAsyncResult
-      If String.IsNullOrEmpty(Url) Then
-        Return Callback.BeginInvoke(Nothing, Nothing, New NullReferenceException("Url"))
+      If String.IsNullOrEmpty(LongUrl) Then
+        Return Callback.BeginInvoke(Nothing, Nothing, New NullReferenceException("LongUrl"))
       ElseIf (Authentication Is Nothing) Then
         Return Callback.BeginInvoke(Nothing, Nothing, New NullReferenceException("Authentication"))
       Else
@@ -98,7 +124,7 @@ Namespace Yourls.API
         Call SB.Append(Me.ApiUrl)
         Call SB.AppendFormat("?action={0}", ActionCreateShortUrl)
         Call SB.AppendFormat("&format={0}", ResponseFormat)
-        Call SB.AppendFormat("&url={0}", HttpUtility.UrlEncode(Url))
+        Call SB.AppendFormat("&url={0}", HttpUtility.UrlEncode(LongUrl))
 
         If (Not String.IsNullOrEmpty(Keyword)) Then Call SB.AppendFormat("&keyword={0}", HttpUtility.UrlEncode(Keyword))
         If (Not String.IsNullOrEmpty(Title)) Then Call SB.AppendFormat("&title={0}", HttpUtility.UrlEncode(Title))
@@ -127,6 +153,14 @@ Namespace Yourls.API
 
 #Region "Function ExpandShortUrl"
 
+    ''' <summary>
+    ''' Get the long URL of a short URL or keyword.
+    ''' </summary>
+    ''' <param name="ShortUrl">The short URL or keyword.</param>
+    ''' <param name="Authentication">Authentication details.</param>
+    ''' <param name="Result">Contains the result. Can be <c>Nothing</c>.</param>
+    ''' <returns>Returns an <c>System.Exception</c> if an error occurred otherwise <c>Nothing</c>.</returns>
+    ''' <remarks></remarks>
     Public Function ExpandShortUrl(ByVal ShortUrl As String,
                                    ByVal Authentication As IYourlsAuthentication,
                                    <Out()> ByRef Result As YourlsExpandShortUrlResult) As Exception
@@ -134,7 +168,7 @@ Namespace Yourls.API
       Dim Ex As Exception = Nothing
 
       If String.IsNullOrEmpty(ShortUrl) Then
-        Ex = New ArgumentNullException("Url")
+        Ex = New ArgumentNullException("ShortUrl")
       Else
         Dim SB As New StringBuilder
 
@@ -151,6 +185,15 @@ Namespace Yourls.API
       Return Ex
     End Function
 
+    ''' <summary>
+    ''' Get the long URL of a short URL or keyword.
+    ''' </summary>
+    ''' <param name="Key">Your own Key for tracking asynchronous calls.</param>
+    ''' <param name="ShortUrl">The short URL or keyword.</param>
+    ''' <param name="Authentication">Authentication details.</param>
+    ''' <param name="Callback">Method to call on completion or failure.</param>
+    ''' <returns>Returns an <c>System.IAsyncResult</c>.</returns>
+    ''' <remarks></remarks>
     Public Function ExpandShortUrlBegin(ByVal Key As Object,
                                         ByVal ShortUrl As String,
                                         ByVal Authentication As IYourlsAuthentication,
@@ -177,7 +220,7 @@ Namespace Yourls.API
     ''' <param name="Result">Asynchronous result</param>
     ''' <param name="Key">Contains your key for tracking asynchronous calls.</param>
     ''' <param name="Response">Contains response if applicable.</param>
-    ''' <returns>Return an <c>System.Exception</c> if an error occurred otherwise <c>Nothing</c>.</returns>
+    ''' <returns>Returns an <c>System.Exception</c> if an error occurred otherwise <c>Nothing</c>.</returns>
     ''' <remarks></remarks>
     Public Function ExpandShortUrlEnd(ByVal Result As IAsyncResult,
                                       <Out()> ByRef Key As Object,
@@ -189,6 +232,14 @@ Namespace Yourls.API
 
 #Region "Function GetUrlStats"
 
+    ''' <summary>
+    ''' Get the URL statistics from a short URL or keyword.
+    ''' </summary>
+    ''' <param name="ShortUrl">The short URL or keyword.</param>
+    ''' <param name="Authentication">Authentication details.</param>
+    ''' <param name="Result">Contains the result. Can be <c>Nothing</c>.</param>
+    ''' <returns>Returns an <c>System.Exception</c> if an error occurred otherwise <c>Nothing</c>.</returns>
+    ''' <remarks></remarks>
     Public Function GetUrlStats(ByVal ShortUrl As String,
                                 ByVal Authentication As IYourlsAuthentication,
                                 <Out()> ByRef Result As YourlsGetUrlStatsResult) As Exception
@@ -196,7 +247,7 @@ Namespace Yourls.API
       Dim Ex As Exception = Nothing
 
       If String.IsNullOrEmpty(ShortUrl) Then
-        Ex = New ArgumentNullException("Url")
+        Ex = New ArgumentNullException("ShortUrl")
       Else
         Dim SB As New StringBuilder
 
@@ -213,6 +264,15 @@ Namespace Yourls.API
       Return Ex
     End Function
 
+    ''' <summary>
+    ''' Get the URL statistics from a short URL or keyword.
+    ''' </summary>
+    ''' <param name="Key">Your own Key for tracking asynchronous calls.</param>
+    ''' <param name="ShortUrl">The short URL or keyword.</param>
+    ''' <param name="Authentication">Authentication details.</param>
+    ''' <param name="Callback">Method to call on completion or failure.</param>
+    ''' <returns>Returns an <c>System.IAsyncResult</c>.</returns>
+    ''' <remarks></remarks>
     Public Function GetUrlStatsBegin(ByVal Key As Object,
                                      ByVal ShortUrl As String,
                                      ByVal Authentication As IYourlsAuthentication,
@@ -251,56 +311,62 @@ Namespace Yourls.API
 
 #Region "Function GetStats"
 
-    Public Function GetStats(ByVal ShortUrl As String,
-                             ByVal Filter As eYourlsFilter,
+    ''' <summary>
+    ''' Get URL statistics.
+    ''' </summary>
+    ''' <param name="Filter">URL based on Filter</param>
+    ''' <param name="Limit">The number of links to return. (Issue: NYA-7: Implementation limits result to 25 links)</param>
+    ''' <param name="Authentication">Authentication details.</param>
+    ''' <param name="Result">Contains the result. Can be <c>Nothing</c>.</param>
+    ''' <returns>Returns an <c>System.Exception</c> if an error occurred otherwise <c>Nothing</c>.</returns>
+    ''' <remarks></remarks>
+    Public Function GetStats(ByVal Filter As eYourlsFilter,
                              ByVal Limit As Int32,
                              ByVal Authentication As IYourlsAuthentication,
                              <Out()> ByRef Result As YourlsGetStatsResult) As Exception
-      Result = Nothing
       Dim Ex As Exception = Nothing
 
-      If String.IsNullOrEmpty(ShortUrl) Then
-        Ex = New ArgumentNullException("Url")
-      Else
-        Dim SB As New StringBuilder
+      Dim SB As New StringBuilder
 
-        Call SB.Append(Me.ApiUrl)
-        Call SB.AppendFormat("?action={0}", ActionGetStats)
-        Call SB.AppendFormat("&format={0}", ResponseFormat)
-        Call SB.AppendFormat("&shorturl={0}", HttpUtility.UrlEncode(ShortUrl))
-        Call SB.AppendFormat("&filter={0}", HttpUtility.UrlEncode(Filter.ToString()))
-        Call SB.AppendFormat("&limit={0}", Limit.ToString())
+      Call SB.Append(Me.ApiUrl)
+      Call SB.AppendFormat("?action={0}", ActionGetStats)
+      Call SB.AppendFormat("&format={0}", ResponseFormat)
+      Call SB.AppendFormat("&filter={0}", HttpUtility.UrlEncode(Filter.ToString()))
+      Call SB.AppendFormat("&limit={0}", Limit.ToString())
 
-        Call SB.Append(GetAuthenticationDetails(Authentication))
+      Call SB.Append(GetAuthenticationDetails(Authentication))
 
-        Result = QueryAndParse(Of YourlsGetStatsResult)(SB.ToString(), Ex)
-      End If
+      Result = QueryAndParse(Of YourlsGetStatsResult)(SB.ToString(), Ex)
 
       Return Ex
     End Function
 
+    ''' <summary>
+    ''' Get URL statistics.
+    ''' </summary>
+    ''' <param name="Key">Your own Key for tracking asynchronous calls.</param>
+    ''' <param name="Filter">URL based on Filter</param>
+    ''' <param name="Limit">The number of links to return. (Issue: NYA-7: Implementation limits result to 25 links)</param>
+    ''' <param name="Authentication">Authentication details.</param>
+    ''' <param name="Callback">Method to call on completion or failure.</param>
+    ''' <returns>Returns an <c>System.IAsyncResult</c>.</returns>
+    ''' <remarks></remarks>
     Public Function GetStatsBegin(ByVal Key As Object,
-                                  ByVal ShortUrl As String,
                                   ByVal Filter As eYourlsFilter,
                                   ByVal Limit As Int32,
                                   ByVal Authentication As IYourlsAuthentication,
                                   ByVal Callback As AsyncCallback) As IAsyncResult
-      If String.IsNullOrEmpty(ShortUrl) Then
-        Return Callback.BeginInvoke(Nothing, Nothing, New NullReferenceException("Url"))
-      Else
-        Dim SB As New StringBuilder
+      Dim SB As New StringBuilder
 
-        Call SB.Append(Me.ApiUrl)
-        Call SB.AppendFormat("?action={0}", ActionGetStats)
-        Call SB.AppendFormat("&format={0}", ResponseFormat)
-        Call SB.AppendFormat("&shorturl={0}", HttpUtility.UrlEncode(ShortUrl))
-        Call SB.AppendFormat("&filter={0}", HttpUtility.UrlEncode(Filter.ToString()))
-        Call SB.AppendFormat("&limit={0}", Limit.ToString())
+      Call SB.Append(Me.ApiUrl)
+      Call SB.AppendFormat("?action={0}", ActionGetStats)
+      Call SB.AppendFormat("&format={0}", ResponseFormat)
+      Call SB.AppendFormat("&filter={0}", HttpUtility.UrlEncode(Filter.ToString()))
+      Call SB.AppendFormat("&limit={0}", Limit.ToString())
 
-        Call SB.Append(GetAuthenticationDetails(Authentication))
+      Call SB.Append(GetAuthenticationDetails(Authentication))
 
-        Return QueryAndParseBegin(Key, SB.ToString(), Callback)
-      End If
+      Return QueryAndParseBegin(Key, SB.ToString(), Callback)
     End Function
 
     ''' <summary>
@@ -321,6 +387,13 @@ Namespace Yourls.API
 
 #Region "Function GetDatabaseStats"
 
+    ''' <summary>
+    ''' Get database statistics.
+    ''' </summary>
+    ''' <param name="Authentication">Authentication details.</param>
+    ''' <param name="Result">Contains the result. Can be <c>Nothing</c>.</param>
+    ''' <returns>Returns an <c>System.Exception</c> if an error occurred otherwise <c>Nothing</c>.</returns>
+    ''' <remarks></remarks>
     Public Function GetDatabaseStats(ByVal Authentication As IYourlsAuthentication,
                                      <Out()> ByRef Result As YourlsGetDatabaseStatsResult) As Exception
       Dim Ex As Exception = Nothing
@@ -338,6 +411,14 @@ Namespace Yourls.API
       Return Ex
     End Function
 
+    ''' <summary>
+    ''' Get database statistics.
+    ''' </summary>
+    ''' <param name="Key">Your own Key for tracking asynchronous calls.</param>
+    ''' <param name="Authentication">Authentication details.</param>
+    ''' <param name="Callback">Method to call on completion or failure.</param>
+    ''' <returns>Returns an <c>System.IAsyncResult</c>.</returns>
+    ''' <remarks></remarks>
     Public Function GetDatabaseStatsBegin(ByVal Key As Object,
                                           ByVal Authentication As IYourlsAuthentication,
                                           ByVal Callback As AsyncCallback) As IAsyncResult
@@ -368,6 +449,12 @@ Namespace Yourls.API
 
 #End Region
 
+    ''' <summary>
+    ''' Returns the enocoded authentication details.
+    ''' </summary>
+    ''' <param name="Authentication">Authentication details.</param>
+    ''' <returns>Returns the enocoded authentication details.</returns>
+    ''' <remarks></remarks>
     Private Shared Function GetAuthenticationDetails(ByVal Authentication As IYourlsAuthentication) As String
       Dim SB As New StringBuilder
 
@@ -413,18 +500,6 @@ Namespace Yourls.API
         Response = Request.GetResponse()
         ResponseStream = Response.GetResponseStream()
 
-        'HACK
-        Dim Stream As Stream
-        'Copy stream
-        Stream = New MemoryStream()
-        Call ResponseStream.CopyTo(Stream)
-        Stream.Position = 0
-        Dim sr As New StreamReader(Stream)
-        Dim str As String = sr.ReadToEnd
-        Call Trace.WriteLine(Str)
-        Stream.Position = 0
-        ResponseStream = Stream
-
         'Create Serilizer
         Dim Serializer As New DataContractJsonSerializer(GetType(TItem))
 
@@ -443,18 +518,6 @@ Namespace Yourls.API
 
           If (WebEx.Response IsNot Nothing) Then
             ResponseStream = WebEx.Response.GetResponseStream()
-
-            'HACK
-            Dim Stream As Stream
-            'Copy stream
-            Stream = New MemoryStream()
-            Call ResponseStream.CopyTo(Stream)
-            Stream.Position = 0
-            Dim sr As New StreamReader(Stream)
-            Dim str As String = sr.ReadToEnd
-            Call Trace.WriteLine(str)
-            Stream.Position = 0
-            ResponseStream = Stream
 
             'Create Serilizer
             Dim Serializer As New DataContractJsonSerializer(GetType(TItem))
@@ -561,6 +624,7 @@ Namespace Yourls.API
     ''' <summary>
     ''' Parses the <c>IAsyncResult</c>.
     ''' </summary>
+    ''' <typeparam name="TItem">The YOURLS result type.</typeparam>
     ''' <param name="Result">The <c>IAsyncResult</c> from the Callback.</param>
     ''' <param name="Key">Your key object.</param>
     ''' <param name="Response">Contains the parsed response if successful otherwise <c>Nothing</c>.</param>
