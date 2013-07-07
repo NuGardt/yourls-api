@@ -38,14 +38,14 @@ Namespace Yourls.API
     Bottom
 
     ''' <summary>
-    ''' Get x random URLs.
+    ''' Get X random URLs.
     ''' </summary>
     ''' <remarks></remarks>
     <EnumMember(Value := "rand")> _
     Rand
 
     ''' <summary>
-    ''' Get the x latests URLs.
+    ''' Get the X latests URLs.
     ''' </summary>
     ''' <remarks></remarks>
     <EnumMember(Value := "last")> _
