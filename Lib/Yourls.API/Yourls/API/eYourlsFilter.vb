@@ -18,16 +18,36 @@
 Imports System.Runtime.Serialization
 
 Namespace Yourls.API
+  ''' <summary>
+  ''' Filter for getting URLs.
+  ''' </summary>
+  ''' <remarks></remarks>
   Public Enum eYourlsFilter
+    ''' <summary>
+    ''' Get the top X of URLS.
+    ''' </summary>
+    ''' <remarks></remarks>
     <EnumMember(Value := "top")> _
     Top
 
+    ''' <summary>
+    ''' Get the bottom X of URLs.
+    ''' </summary>
+    ''' <remarks></remarks>
     <EnumMember(Value := "bottom")> _
     Bottom
 
+    ''' <summary>
+    ''' Get x random URLs.
+    ''' </summary>
+    ''' <remarks></remarks>
     <EnumMember(Value := "rand")> _
     Rand
 
+    ''' <summary>
+    ''' Get the x latests URLs.
+    ''' </summary>
+    ''' <remarks></remarks>
     <EnumMember(Value := "last")> _
     Last
   End Enum

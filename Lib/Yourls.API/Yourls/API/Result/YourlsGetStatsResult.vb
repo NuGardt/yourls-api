@@ -22,7 +22,7 @@ Namespace Yourls.API.Result
   ''' YOURLS API response.
   ''' </summary>
   ''' <remarks></remarks>
-    <DataContract()>
+  <DataContract()>
   Public Class YourlsGetStatsResult
     Inherits YourlsResult
 
@@ -91,9 +91,17 @@ Namespace Yourls.API.Result
     '"callback":""
     '}
 
+    ''' <summary>
+    ''' Returns or sets the links.
+    ''' </summary>
+    ''' <remarks></remarks>
     <DataMember(Name := "links")>
     Public Links As Links
 
+    ''' <summary>
+    ''' Returns or sets the Database statistics.
+    ''' </summary>
+    ''' <remarks></remarks>
     <DataMember(Name := "stats")>
     Public Stats As DatabaseStats
   End Class

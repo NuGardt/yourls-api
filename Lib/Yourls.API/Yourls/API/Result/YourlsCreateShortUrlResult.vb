@@ -19,10 +19,10 @@ Imports System.Runtime.Serialization
 
 Namespace Yourls.API.Result
   ''' <summary>
-  ''' YOURLS API response.
+  ''' YOURLS API response for creating a short link.
   ''' </summary>
   ''' <remarks></remarks>
-    <DataContract()>
+  <DataContract()>
   Public Class YourlsCreateShortUrlResult
     Inherits YourlsResult
 
@@ -50,18 +50,38 @@ Namespace Yourls.API.Result
     '"callback":""
     '}
 
+    ''' <summary>
+    ''' Returns or sets the status.
+    ''' </summary>
+    ''' <remarks></remarks>
     <DataMember(Name := "status")>
     Public Status As String
 
+    ''' <summary>
+    ''' Returns or sets the code.
+    ''' </summary>
+    ''' <remarks></remarks>
     <DataMember(Name := "code")>
     Public Code As String
 
+    ''' <summary>
+    ''' Returns or sets the title of the short link.
+    ''' </summary>
+    ''' <remarks></remarks>
     <DataMember(Name := "title")>
     Public Title As String
 
+    ''' <summary>
+    ''' Returns or sets the short URL.
+    ''' </summary>
+    ''' <remarks></remarks>
     <DataMember(Name := "shorturl")>
     Public ShortUrl As String
 
+    ''' <summary>
+    ''' Returns or sets the long URL.
+    ''' </summary>
+    ''' <remarks></remarks>
     <DataMember(Name := "url")>
     Public Url As UrlData
   End Class

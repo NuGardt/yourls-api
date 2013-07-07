@@ -16,13 +16,41 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 '
 Namespace Yourls.API
+  ''' <summary>
+  ''' Authentication interface.
+  ''' </summary>
+  ''' <remarks></remarks>
   Public Interface IYourlsAuthentication
+    ''' <summary>
+    ''' YOURLS username.
+    ''' </summary>
+    ''' <value></value>
+    ''' <returns></returns>
+    ''' <remarks></remarks>
     Property Username As String
 
+    ''' <summary>
+    ''' YOURLS password.
+    ''' </summary>
+    ''' <value></value>
+    ''' <returns></returns>
+    ''' <remarks></remarks>
     Property Password As String
 
+    ''' <summary>
+    ''' YOURLS Signature.
+    ''' </summary>
+    ''' <value></value>
+    ''' <returns></returns>
+    ''' <remarks></remarks>
     Property Signature As String
 
+    ''' <summary>
+    ''' Unix timestamp to start URL expiry.
+    ''' </summary>
+    ''' <value></value>
+    ''' <returns></returns>
+    ''' <remarks></remarks>
     Property UnixTimestamp As Nullable(Of Int64)
   End Interface
 End Namespace

@@ -39,6 +39,7 @@ Namespace Yourls.API
 
     Private Service As YourlsService
     Private MyAuth As IYourlsAuthentication
+    Private ReadOnly MyKey As Guid = Guid.NewGuid()
 
     Sub Main()
       Dim CreateShortUrlResult As YourlsCreateShortUrlResult = Nothing
@@ -62,14 +63,14 @@ Namespace Yourls.API
 
       'CreateShortUrl - Sync
       If SyncTest AndAlso CreateShortUrl Then
-        Ex = Service.CreateShortUrl(Url := "http://www.nugardt.com", Authentication := MyAuth, Result := CreateShortUrlResult, Keyword := "", Title := "")
+        Ex = Service.CreateShortUrl(LongUrl := "http://www.nugardt.com", Authentication := MyAuth, Result := CreateShortUrlResult, Keyword := "", Title := "")
         If (Ex IsNot Nothing) Then Call Trace.WriteLine(Ex.ToString())
       End If
 
       'CreateShortUrl - ASync
       If AsyncTest AndAlso CreateShortUrl Then
         Call Interlocked.Increment(AsyncCallsBusy)
-        AsyncResult = Service.CreateShortUrlBegin(Key := Nothing, Url := "http://www.nugardt.com", Authentication := MyAuth, Callback := CreateShortUrlCallback, Keyword := "", Title := "")
+        AsyncResult = Service.CreateShortUrlBegin(Key := MyKey, LongUrl := "http://www.nugardt.com", Authentication := MyAuth, Callback := CreateShortUrlCallback, Keyword := "", Title := "")
       End If
 
       'ExpandShortUrl - Sync
@@ -81,7 +82,7 @@ Namespace Yourls.API
       'ExpandShortUrl - ASync
       If AsyncTest AndAlso ExpandShortUrl Then
         Call Interlocked.Increment(AsyncCallsBusy)
-        AsyncResult = Service.ExpandShortUrlBegin(Key := Nothing, ShortUrl := "http://ls.nugardt.com/2go8s", Authentication := MyAuth, Callback := ExpandShortUrlCallback)
+        AsyncResult = Service.ExpandShortUrlBegin(Key := MyKey, ShortUrl := "http://ls.nugardt.com/2go8s", Authentication := MyAuth, Callback := ExpandShortUrlCallback)
       End If
 
       'GetUrlStats - Sync
@@ -93,19 +94,19 @@ Namespace Yourls.API
       'GetUrlStats - ASync
       If AsyncTest AndAlso GetUrlStats Then
         Call Interlocked.Increment(AsyncCallsBusy)
-        AsyncResult = Service.GetUrlStatsBegin(Key := Nothing, ShortUrl := "http://ls.nugardt.com/2go8s", Authentication := MyAuth, Callback := GetUrlStatsCallback)
+        AsyncResult = Service.GetUrlStatsBegin(Key := MyKey, ShortUrl := "http://ls.nugardt.com/2go8s", Authentication := MyAuth, Callback := GetUrlStatsCallback)
       End If
 
       'GetStats - Sync
       If SyncTest AndAlso GetStats Then
-        Ex = Service.GetStats(ShortUrl := "http://ls.nugardt.com/2go8s", Authentication := MyAuth, Filter := eYourlsFilter.Top, Limit := 34, Result := GetStatsResult)
+        Ex = Service.GetStats(Authentication := MyAuth, Filter := eYourlsFilter.Top, Limit := 34, Result := GetStatsResult)
         If (Ex IsNot Nothing) Then Call Trace.WriteLine(Ex.ToString())
       End If
 
       'GetStats - ASync
       If AsyncTest AndAlso GetStats Then
         Call Interlocked.Increment(AsyncCallsBusy)
-        AsyncResult = Service.GetStatsBegin(Key := Nothing, ShortUrl := "http://ls.nugardt.com/2go8s", Authentication := MyAuth, Filter := eYourlsFilter.Top, Limit := 34, Callback := GetStatsCallback)
+        AsyncResult = Service.GetStatsBegin(Key := MyKey, Authentication := MyAuth, Filter := eYourlsFilter.Top, Limit := 34, Callback := GetStatsCallback)
       End If
 
       'GetDatabaseStats - Sync
@@ -117,7 +118,7 @@ Namespace Yourls.API
       'GetDatabaseStats - ASync
       If AsyncTest AndAlso GetDatabaseStats Then
         Call Interlocked.Increment(AsyncCallsBusy)
-        AsyncResult = Service.GetDatabaseStatsBegin(Key := Nothing, Authentication := MyAuth, Callback := GetDatabaseStatsCallback)
+        AsyncResult = Service.GetDatabaseStatsBegin(Key := MyKey, Authentication := MyAuth, Callback := GetDatabaseStatsCallback)
       End If
 
       Trace.WriteLine("Waiting on callbacks to complete...")
@@ -135,9 +136,10 @@ Namespace Yourls.API
 
     Private Sub iCreateShortUrlCallback(ByVal Result As IAsyncResult)
       Dim Response As YourlsCreateShortUrlResult = Nothing
+      Dim Key As Object = Nothing
       Dim Ex As Exception
 
-      Ex = Service.CreateShortUrlEnd(Result, Nothing, Response)
+      Ex = Service.CreateShortUrlEnd(Result, Key, Response)
 
       If (Ex IsNot Nothing) Then Call Trace.WriteLine(Ex.ToString())
 
@@ -148,9 +150,10 @@ Namespace Yourls.API
 
     Private Sub iExpandShortUrlCallback(ByVal Result As IAsyncResult)
       Dim Response As YourlsExpandShortUrlResult = Nothing
+      Dim Key As Object = Nothing
       Dim Ex As Exception
 
-      Ex = Service.ExpandShortUrlEnd(Result, Nothing, Response)
+      Ex = Service.ExpandShortUrlEnd(Result, Key, Response)
 
       If (Ex IsNot Nothing) Then Call Trace.WriteLine(Ex.ToString())
 
@@ -161,9 +164,10 @@ Namespace Yourls.API
 
     Private Sub iGetUrlStatsCallback(ByVal Result As IAsyncResult)
       Dim Response As YourlsGetUrlStatsResult = Nothing
+      Dim Key As Object = Nothing
       Dim Ex As Exception
 
-      Ex = Service.GetUrlStatsEnd(Result, Nothing, Response)
+      Ex = Service.GetUrlStatsEnd(Result, Key, Response)
 
       If (Ex IsNot Nothing) Then Call Trace.WriteLine(Ex.ToString())
 
@@ -174,9 +178,10 @@ Namespace Yourls.API
 
     Private Sub iGetStatsCallback(ByVal Result As IAsyncResult)
       Dim Response As YourlsGetStatsResult = Nothing
+      Dim Key As Object = Nothing
       Dim Ex As Exception
 
-      Ex = Service.GetStatsEnd(Result, Nothing, Response)
+      Ex = Service.GetStatsEnd(Result, Key, Response)
 
       If (Ex IsNot Nothing) Then Call Trace.WriteLine(Ex.ToString())
 
@@ -187,9 +192,10 @@ Namespace Yourls.API
 
     Private Sub iGetDatabaseStatsCallback(ByVal Result As IAsyncResult)
       Dim Response As YourlsGetDatabaseStatsResult = Nothing
+      Dim Key As Object = Nothing
       Dim Ex As Exception
 
-      Ex = Service.GetDatabaseStatsEnd(Result, Nothing, Response)
+      Ex = Service.GetDatabaseStatsEnd(Result, Key, Response)
 
       If (Ex IsNot Nothing) Then Call Trace.WriteLine(Ex.ToString())
 

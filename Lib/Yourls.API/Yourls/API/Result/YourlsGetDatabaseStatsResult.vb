@@ -19,10 +19,10 @@ Imports System.Runtime.Serialization
 
 Namespace Yourls.API.Result
   ''' <summary>
-  ''' YOURLS API response.
+  ''' YOURLS API response for requesting the database statistics.
   ''' </summary>
   ''' <remarks></remarks>
-    <DataContract()>
+  <DataContract()>
   Public Class YourlsGetDatabaseStatsResult
     Inherits YourlsResult
 
@@ -44,6 +44,10 @@ Namespace Yourls.API.Result
     '"callback":""
     '}
 
+    ''' <summary>
+    ''' Returns or sets the database statistics.
+    ''' </summary>
+    ''' <remarks></remarks>
     <DataMember(Name := "db-stats")>
     Public Stats As DatabaseStats
   End Class

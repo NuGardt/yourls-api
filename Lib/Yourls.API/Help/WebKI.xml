@@ -32,8 +32,8 @@
   <HelpKINode Title="GetDatabaseStats method" Url="html/65b0ff7f-999b-8b53-a8c6-bf9763af1b71.htm" />
   <HelpKINode Title="GetDatabaseStatsBegin method" Url="html/9ab6c142-0793-db02-32d3-06e7bd838c7d.htm" />
   <HelpKINode Title="GetDatabaseStatsEnd method" Url="html/7ca64e50-7804-6f76-c209-7f410cdb56bf.htm" />
-  <HelpKINode Title="GetStats method" Url="html/245d7ee8-dcaa-a028-76dc-c9da87435796.htm" />
-  <HelpKINode Title="GetStatsBegin method" Url="html/0606f1d3-2916-1a7c-2d78-9a21c022085f.htm" />
+  <HelpKINode Title="GetStats method" Url="html/84f74345-fd54-a8db-7358-726ebf05fdc2.htm" />
+  <HelpKINode Title="GetStatsBegin method" Url="html/3a35cb7d-29df-9b10-8570-687d469577a8.htm" />
   <HelpKINode Title="GetStatsEnd method" Url="html/84ab56fa-d9bf-47b7-d101-188422f56dd6.htm" />
   <HelpKINode Title="GetUrlStats method" Url="html/4c60a435-ef65-a365-9e90-47704cbd0d38.htm" />
   <HelpKINode Title="GetUrlStatsBegin method" Url="html/8aa956c3-f019-081f-fd96-d8ac884e4797.htm" />
@@ -62,7 +62,22 @@
   <HelpKINode Title="Link field" Url="html/f08cf3b6-58a8-8852-852d-720b535b7856.htm" />
   <HelpKINode Title="Link1 field" Url="html/700f1c00-e2ed-b1c7-5c20-55737670cdf0.htm" />
   <HelpKINode Title="Link10 field" Url="html/4a8d341b-1504-1e88-93d8-92a74f3b4009.htm" />
+  <HelpKINode Title="Link11 field" Url="html/05e7eeb7-8036-5963-3177-88e20950a52b.htm" />
+  <HelpKINode Title="Link12 field" Url="html/e34b71bd-80dd-6d19-46d7-ec446ff5b811.htm" />
+  <HelpKINode Title="Link13 field" Url="html/9a0548d9-0316-dbeb-c01e-f3b297670adc.htm" />
+  <HelpKINode Title="Link14 field" Url="html/bc7a4340-6f1d-8e86-346e-8cfc67b88cf2.htm" />
+  <HelpKINode Title="Link15 field" Url="html/258894d6-625d-ca22-440a-b887279acce5.htm" />
+  <HelpKINode Title="Link16 field" Url="html/178a2bdd-82de-6c47-076a-06f157c30fb7.htm" />
+  <HelpKINode Title="Link17 field" Url="html/cebdfe24-387f-d347-bfd3-f309aac9c7a7.htm" />
+  <HelpKINode Title="Link18 field" Url="html/4f89841a-5d8b-2e16-845f-5bf70642689f.htm" />
+  <HelpKINode Title="Link19 field" Url="html/caded77b-a5c9-294e-b0e9-58c831792d11.htm" />
   <HelpKINode Title="Link2 field" Url="html/a695f89b-8c50-10f0-5e82-ae87234f010e.htm" />
+  <HelpKINode Title="Link20 field" Url="html/d0c77188-a03f-6910-4449-bf8aaf7fc1e3.htm" />
+  <HelpKINode Title="Link21 field" Url="html/949c0255-c541-ba4f-7b7b-bfd19c384773.htm" />
+  <HelpKINode Title="Link22 field" Url="html/0d4f172c-319e-5f28-5d97-a4df2c615fe1.htm" />
+  <HelpKINode Title="Link23 field" Url="html/3aea3754-5781-f557-8980-22d1a7a32182.htm" />
+  <HelpKINode Title="Link24 field" Url="html/45f6c404-151e-db0b-1701-d3c003dc8aff.htm" />
+  <HelpKINode Title="Link25 field" Url="html/a3bf1a89-27bf-7212-7202-b3d1ad8997cc.htm" />
   <HelpKINode Title="Link3 field" Url="html/f7d6e76e-f692-e69e-3e8c-6b14b823f45e.htm" />
   <HelpKINode Title="Link4 field" Url="html/0e63ab9f-1cd8-20ac-c81e-b2f168cd3461.htm" />
   <HelpKINode Title="Link5 field" Url="html/38cd25ea-476f-53f9-21b9-1f0b3356e4bc.htm" />
@@ -98,7 +113,22 @@
   <HelpKINode Title="Links field" Url="html/0248ee32-562b-6b4f-a176-fa35ebf767f8.htm" />
   <HelpKINode Title="Links.Link1 field" Url="html/700f1c00-e2ed-b1c7-5c20-55737670cdf0.htm" />
   <HelpKINode Title="Links.Link10 field" Url="html/4a8d341b-1504-1e88-93d8-92a74f3b4009.htm" />
+  <HelpKINode Title="Links.Link11 field" Url="html/05e7eeb7-8036-5963-3177-88e20950a52b.htm" />
+  <HelpKINode Title="Links.Link12 field" Url="html/e34b71bd-80dd-6d19-46d7-ec446ff5b811.htm" />
+  <HelpKINode Title="Links.Link13 field" Url="html/9a0548d9-0316-dbeb-c01e-f3b297670adc.htm" />
+  <HelpKINode Title="Links.Link14 field" Url="html/bc7a4340-6f1d-8e86-346e-8cfc67b88cf2.htm" />
+  <HelpKINode Title="Links.Link15 field" Url="html/258894d6-625d-ca22-440a-b887279acce5.htm" />
+  <HelpKINode Title="Links.Link16 field" Url="html/178a2bdd-82de-6c47-076a-06f157c30fb7.htm" />
+  <HelpKINode Title="Links.Link17 field" Url="html/cebdfe24-387f-d347-bfd3-f309aac9c7a7.htm" />
+  <HelpKINode Title="Links.Link18 field" Url="html/4f89841a-5d8b-2e16-845f-5bf70642689f.htm" />
+  <HelpKINode Title="Links.Link19 field" Url="html/caded77b-a5c9-294e-b0e9-58c831792d11.htm" />
   <HelpKINode Title="Links.Link2 field" Url="html/a695f89b-8c50-10f0-5e82-ae87234f010e.htm" />
+  <HelpKINode Title="Links.Link20 field" Url="html/d0c77188-a03f-6910-4449-bf8aaf7fc1e3.htm" />
+  <HelpKINode Title="Links.Link21 field" Url="html/949c0255-c541-ba4f-7b7b-bfd19c384773.htm" />
+  <HelpKINode Title="Links.Link22 field" Url="html/0d4f172c-319e-5f28-5d97-a4df2c615fe1.htm" />
+  <HelpKINode Title="Links.Link23 field" Url="html/3aea3754-5781-f557-8980-22d1a7a32182.htm" />
+  <HelpKINode Title="Links.Link24 field" Url="html/45f6c404-151e-db0b-1701-d3c003dc8aff.htm" />
+  <HelpKINode Title="Links.Link25 field" Url="html/a3bf1a89-27bf-7212-7202-b3d1ad8997cc.htm" />
   <HelpKINode Title="Links.Link3 field" Url="html/f7d6e76e-f692-e69e-3e8c-6b14b823f45e.htm" />
   <HelpKINode Title="Links.Link4 field" Url="html/0e63ab9f-1cd8-20ac-c81e-b2f168cd3461.htm" />
   <HelpKINode Title="Links.Link5 field" Url="html/38cd25ea-476f-53f9-21b9-1f0b3356e4bc.htm" />
@@ -333,8 +363,8 @@
   <HelpKINode Title="YourlsService.GetDatabaseStats method" Url="html/65b0ff7f-999b-8b53-a8c6-bf9763af1b71.htm" />
   <HelpKINode Title="YourlsService.GetDatabaseStatsBegin method" Url="html/9ab6c142-0793-db02-32d3-06e7bd838c7d.htm" />
   <HelpKINode Title="YourlsService.GetDatabaseStatsEnd method" Url="html/7ca64e50-7804-6f76-c209-7f410cdb56bf.htm" />
-  <HelpKINode Title="YourlsService.GetStats method" Url="html/245d7ee8-dcaa-a028-76dc-c9da87435796.htm" />
-  <HelpKINode Title="YourlsService.GetStatsBegin method" Url="html/0606f1d3-2916-1a7c-2d78-9a21c022085f.htm" />
+  <HelpKINode Title="YourlsService.GetStats method" Url="html/84f74345-fd54-a8db-7358-726ebf05fdc2.htm" />
+  <HelpKINode Title="YourlsService.GetStatsBegin method" Url="html/3a35cb7d-29df-9b10-8570-687d469577a8.htm" />
   <HelpKINode Title="YourlsService.GetStatsEnd method" Url="html/84ab56fa-d9bf-47b7-d101-188422f56dd6.htm" />
   <HelpKINode Title="YourlsService.GetUrlStats method" Url="html/4c60a435-ef65-a365-9e90-47704cbd0d38.htm" />
   <HelpKINode Title="YourlsService.GetUrlStatsBegin method" Url="html/8aa956c3-f019-081f-fd96-d8ac884e4797.htm" />

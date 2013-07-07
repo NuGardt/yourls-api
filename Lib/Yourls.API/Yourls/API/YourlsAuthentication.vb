@@ -16,9 +16,17 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 '
 Namespace Yourls.API
+  ''' <summary>
+  ''' This class implements the IYourlsAuthentication interface and manages the authentication details.
+  ''' </summary>
+  ''' <remarks></remarks>
   Public Class YourlsAuthentication
     Implements IYourlsAuthentication
 
+    ''' <summary>
+    ''' Reuturn the UNIX Base Time (01.01.1970 00:00)
+    ''' </summary>
+    ''' <remarks></remarks>
     Private ReadOnly UnixBaseTime As DateTime = New DateTime(1970, 1, 1, 0, 0, 0)
 
     Private m_Username As String
@@ -43,7 +51,8 @@ Namespace Yourls.API
     ''' <summary>
     ''' Constructor.
     ''' </summary>
-    ''' <param name="Signature">Your YOURLS signature.</param>
+    ''' <param name="Signature">The YOURLS signature.</param>
+    ''' <param name="Timestamp">The Timestamp to start URL expiry.</param>
     ''' <remarks></remarks>
     Public Sub New(ByVal Signature As String,
                    Optional ByVal Timestamp As Nullable(Of DateTime) = Nothing)
@@ -53,6 +62,12 @@ Namespace Yourls.API
       Me.Timestamp = Timestamp
     End Sub
 
+    ''' <summary>
+    ''' Returns or sets the YOURLS username.
+    ''' </summary>
+    ''' <value></value>
+    ''' <returns></returns>
+    ''' <remarks></remarks>
     Public Property Username As String Implements IYourlsAuthentication.Username
       Get
         Return Me.m_Username
@@ -62,6 +77,12 @@ Namespace Yourls.API
       End Set
     End Property
 
+    ''' <summary>
+    ''' Returns or sets the YOURLS password.
+    ''' </summary>
+    ''' <value></value>
+    ''' <returns></returns>
+    ''' <remarks></remarks>
     Public Property Password As String Implements IYourlsAuthentication.Password
       Get
         Return Me.m_Password
@@ -71,6 +92,12 @@ Namespace Yourls.API
       End Set
     End Property
 
+    ''' <summary>
+    ''' Returns or sets the YOURLS signature for authentication.
+    ''' </summary>
+    ''' <value></value>
+    ''' <returns></returns>
+    ''' <remarks></remarks>
     Public Property Signature As String Implements IYourlsAuthentication.Signature
       Get
         Return Me.m_Signature
@@ -80,6 +107,12 @@ Namespace Yourls.API
       End Set
     End Property
 
+    ''' <summary>
+    ''' Returns or sets the Timestamp to start URL expiry.
+    ''' </summary>
+    ''' <value></value>
+    ''' <returns></returns>
+    ''' <remarks></remarks>
     Public Property Timestamp As Nullable(Of DateTime)
       Get
         If Me.m_UnixTimestamp.HasValue Then
@@ -97,6 +130,12 @@ Namespace Yourls.API
       End Set
     End Property
 
+    ''' <summary>
+    ''' Returns or sets the UNIX Timestamp. Since this is not .Net standard we use DateTime publically.
+    ''' </summary>
+    ''' <value></value>
+    ''' <returns></returns>
+    ''' <remarks></remarks>
     Private Property UnixTimestamp As Nullable(Of Int64) Implements IYourlsAuthentication.UnixTimestamp
       Get
         Return Me.m_UnixTimestamp
