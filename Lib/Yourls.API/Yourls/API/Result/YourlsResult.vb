@@ -28,28 +28,28 @@ Namespace Yourls.API.Result
     ''' Returns or sets the message of the API call.
     ''' </summary>
     ''' <remarks></remarks>
-    <DataMember(Name:="message")>
+    <DataMember(Name := "message")>
     Public Message As String
 
     ''' <summary>
     ''' Returns or sets the status code of the API call. 200 = OK
     ''' </summary>
     ''' <remarks></remarks>
-    <DataMember(Name:="statusCode")>
+    <DataMember(Name := "statusCode")>
     Public StatusCode As Int32
 
     ''' <summary>
     ''' Returns or sets the error code of the API call.
     ''' </summary>
     ''' <remarks></remarks>
-    <DataMember(Name:="errorCode")>
+    <DataMember(Name := "errorCode")>
     Public ErrorCode As Int32
 
     ''' <summary>
     ''' Returns or sets the callback of the API call.
     ''' </summary>
     ''' <remarks></remarks>
-    <DataMember(Name:="callback")>
+    <DataMember(Name := "callback")>
     Public Callback As String
   End Class
 End Namespace
