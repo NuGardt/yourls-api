@@ -28,42 +28,42 @@ Namespace Yourls.API.Result
     ''' Returns or sets the short RL.
     ''' </summary>
     ''' <remarks></remarks>
-    <DataMember(Name:="shorturl")>
+    <DataMember(Name := "shorturl")>
     Public ShortUrl As String
 
     ''' <summary>
     ''' Returns or sets the long URL.
     ''' </summary>
     ''' <remarks></remarks>
-    <DataMember(Name:="url")>
+    <DataMember(Name := "url")>
     Public Url As String
 
     ''' <summary>
     ''' Returns or sets the title of the short link.
     ''' </summary>
     ''' <remarks></remarks>
-    <DataMember(Name:="title")>
+    <DataMember(Name := "title")>
     Public Title As String
 
     ''' <summary>
     ''' Returns or sets the timestamp of creation.
     ''' </summary>
     ''' <remarks></remarks>
-    <DataMember(Name:="timestamp")>
+    <DataMember(Name := "timestamp")>
     Public Timestamp As String
 
     ''' <summary>
     ''' Returns or sets the IP address of the creator of the short link.
     ''' </summary>
     ''' <remarks></remarks>
-    <DataMember(Name:="ip")>
+    <DataMember(Name := "ip")>
     Public Ip As String
 
     ''' <summary>
     ''' Returns or sets the total number clicks of this short link.
     ''' </summary>
     ''' <remarks></remarks>
-    <DataMember(Name:="clicks")>
+    <DataMember(Name := "clicks")>
     Public Clicks As Int32
   End Class
 End Namespace

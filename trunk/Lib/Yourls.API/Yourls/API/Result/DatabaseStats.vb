@@ -28,14 +28,14 @@ Namespace Yourls.API.Result
     ''' Returns or sets the total number of link on the YOURLS server.
     ''' </summary>
     ''' <remarks></remarks>
-    <DataMember(Name:="total_links")>
+    <DataMember(Name := "total_links")>
     Public TotalLinks As Int32
 
     ''' <summary>
     ''' Returns or sets the total number of clicks on the YOURLS server.
     ''' </summary>
     ''' <remarks></remarks>
-    <DataMember(Name:="total_clicks")>
+    <DataMember(Name := "total_clicks")>
     Public TotalClicks As Int32
   End Class
 End Namespace
