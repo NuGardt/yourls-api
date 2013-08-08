@@ -77,7 +77,7 @@
     <FeedbackEMailAddress>support%40nugardt.com</FeedbackEMailAddress>
     <CopyrightHref>http://www.nugardt.com</CopyrightHref>
     <ContentPlacement>AboveNamespaces</ContentPlacement>
-    <MissingTags>Summary, Parameter, Returns, AutoDocumentCtors, Namespace, TypeParameter, AutoDocumentDispose</MissingTags>
+    <MissingTags>AutoDocumentCtors, AutoDocumentDispose</MissingTags>
     <PlugInConfigurations>
       <PlugInConfig id="Output Deployment" enabled="True">
         <configuration deleteAfterDeploy="true">

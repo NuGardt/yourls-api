@@ -21,12 +21,12 @@
     </member>
     <member name="F:NuGardt.Yourls.API.eYourlsFilter.Rand">
       <summary>
- Get x random URLs.
+ Get X random URLs.
  </summary>
     </member>
     <member name="F:NuGardt.Yourls.API.eYourlsFilter.Last">
       <summary>
- Get the x latests URLs.
+ Get the X latests URLs.
  </summary>
     </member>
     <member name="T:NuGardt.Yourls.API.IYourlsAuthentication">
@@ -95,16 +95,7 @@
  </summary>
       <returns></returns>
     </member>
-    <member name="P:NuGardt.Yourls.API.YourlsAuthentication.NuGardt#Yourls#API#IYourlsAuthentication#UnixTimestamp">
-      <summary>
-        <markup>
-          <include item="SMCMissingTag">
-            <parameter>summary</parameter>
-            <parameter>P:NuGardt.Yourls.API.YourlsAuthentication.NuGardt#Yourls#API#IYourlsAuthentication#UnixTimestamp</parameter>
-          </include>
-        </markup>
-      </summary>
-    </member>
+    <member name="P:NuGardt.Yourls.API.YourlsAuthentication.NuGardt#Yourls#API#IYourlsAuthentication#UnixTimestamp"></member>
     <member name="P:NuGardt.Yourls.API.YourlsAuthentication.Username">
       <summary>
  Returns or sets the YOURLS username.
@@ -271,274 +262,29 @@
       <param name="Response">Contains response if applicable.</param>
       <returns>Return an <c>System.Exception</c> if an error occurred otherwise <c>Nothing</c>.</returns>
     </member>
-    <member name="M:NuGardt.Yourls.API.YourlsService.QueryAndParseBegin(System.Object,System.String,System.AsyncCallback)">
+    <member name="T:NuGardt.Yourls.API.Result.IYourlsBaseResult">
       <summary>
- Queries the URL without waiting for the response. The callback is invoked when the response is available.
- </summary>
-      <param name="Key">Your key object.</param>
-      <param name="URL">The query URL.</param>
-      <param name="Callback">Address of callback method to deliver the response.</param>
-      <returns>Returns an <c>System.IAsyncResult</c>.</returns>
-    </member>
-    <member name="M:NuGardt.Yourls.API.YourlsService.QueryAndParseEnd``1(System.IAsyncResult,System.Object@,``0@)">
-      <summary>
- Parses the <c>IAsyncResult</c>.
- </summary>
-      <param name="Result">The <c>IAsyncResult</c> from the Callback.</param>
-      <param name="Key">Your key object.</param>
-      <param name="Response">Contains the parsed response if successful otherwise <c>Nothing</c>.</param>
-      <typeparam name="TItem">The YOURLS result type.</typeparam>
-      <returns>Return an <c>System.Exception</c> if an error occurred otherwise <c>Nothing</c>.</returns>
-    </member>
-    <member name="T:NuGardt.Yourls.API.Result.DatabaseStats">
-      <summary>
- Database Stats.
+ YOURLS API response.
  </summary>
     </member>
-    <member name="M:NuGardt.Yourls.API.Result.DatabaseStats.#ctor">
+    <member name="P:NuGardt.Yourls.API.Result.IYourlsBaseResult.Callback">
       <summary>
-        <markup>
-          <include item="SMCAutoDocConstructor">
-            <parameter>NuGardt.Yourls.API.Result.DatabaseStats</parameter>
-          </include>
-        </markup>
-      </summary>
-    </member>
-    <member name="F:NuGardt.Yourls.API.Result.DatabaseStats.TotalClicks">
-      <summary>
- Returns or sets the total number of clicks on the YOURLS server.
+ Returns or sets the callback of the API call.
  </summary>
     </member>
-    <member name="F:NuGardt.Yourls.API.Result.DatabaseStats.TotalLinks">
+    <member name="P:NuGardt.Yourls.API.Result.IYourlsBaseResult.ErrorCode">
       <summary>
- Returns or sets the total number of link on the YOURLS server.
+ Returns or sets the error code of the API call.
  </summary>
     </member>
-    <member name="T:NuGardt.Yourls.API.Result.LinkData">
+    <member name="P:NuGardt.Yourls.API.Result.IYourlsBaseResult.Message">
       <summary>
- Link data.
+ Returns or sets the message of the API call.
  </summary>
     </member>
-    <member name="M:NuGardt.Yourls.API.Result.LinkData.#ctor">
+    <member name="P:NuGardt.Yourls.API.Result.IYourlsBaseResult.StatusCode">
       <summary>
-        <markup>
-          <include item="SMCAutoDocConstructor">
-            <parameter>NuGardt.Yourls.API.Result.LinkData</parameter>
-          </include>
-        </markup>
-      </summary>
-    </member>
-    <member name="F:NuGardt.Yourls.API.Result.LinkData.Clicks">
-      <summary>
- Returns or sets the total number clicks of this short link.
- </summary>
-    </member>
-    <member name="F:NuGardt.Yourls.API.Result.LinkData.Ip">
-      <summary>
- Returns or sets the IP address of the creator of the short link.
- </summary>
-    </member>
-    <member name="F:NuGardt.Yourls.API.Result.LinkData.ShortUrl">
-      <summary>
- Returns or sets the short RL.
- </summary>
-    </member>
-    <member name="F:NuGardt.Yourls.API.Result.LinkData.Timestamp">
-      <summary>
- Returns or sets the timestamp of creation.
- </summary>
-    </member>
-    <member name="F:NuGardt.Yourls.API.Result.LinkData.Title">
-      <summary>
- Returns or sets the title of the short link.
- </summary>
-    </member>
-    <member name="F:NuGardt.Yourls.API.Result.LinkData.Url">
-      <summary>
- Returns or sets the long URL.
- </summary>
-    </member>
-    <member name="T:NuGardt.Yourls.API.Result.Links">
-      <summary>
- Link 'pseudo-arrray' data.
- </summary>
-    </member>
-    <member name="M:NuGardt.Yourls.API.Result.Links.#ctor">
-      <summary>
-        <markup>
-          <include item="SMCAutoDocConstructor">
-            <parameter>NuGardt.Yourls.API.Result.Links</parameter>
-          </include>
-        </markup>
-      </summary>
-    </member>
-    <member name="F:NuGardt.Yourls.API.Result.Links.Link1">
-      <summary>
- Link
- </summary>
-    </member>
-    <member name="F:NuGardt.Yourls.API.Result.Links.Link10">
-      <summary>
- Link
- </summary>
-    </member>
-    <member name="F:NuGardt.Yourls.API.Result.Links.Link11">
-      <summary>
- Link
- </summary>
-    </member>
-    <member name="F:NuGardt.Yourls.API.Result.Links.Link12">
-      <summary>
- Link
- </summary>
-    </member>
-    <member name="F:NuGardt.Yourls.API.Result.Links.Link13">
-      <summary>
- Link
- </summary>
-    </member>
-    <member name="F:NuGardt.Yourls.API.Result.Links.Link14">
-      <summary>
- Link
- </summary>
-    </member>
-    <member name="F:NuGardt.Yourls.API.Result.Links.Link15">
-      <summary>
- Link
- </summary>
-    </member>
-    <member name="F:NuGardt.Yourls.API.Result.Links.Link16">
-      <summary>
- Link
- </summary>
-    </member>
-    <member name="F:NuGardt.Yourls.API.Result.Links.Link17">
-      <summary>
- Link
- </summary>
-    </member>
-    <member name="F:NuGardt.Yourls.API.Result.Links.Link18">
-      <summary>
- Link
- </summary>
-    </member>
-    <member name="F:NuGardt.Yourls.API.Result.Links.Link19">
-      <summary>
- Link
- </summary>
-    </member>
-    <member name="F:NuGardt.Yourls.API.Result.Links.Link2">
-      <summary>
- Link
- </summary>
-    </member>
-    <member name="F:NuGardt.Yourls.API.Result.Links.Link20">
-      <summary>
- Link
- </summary>
-    </member>
-    <member name="F:NuGardt.Yourls.API.Result.Links.Link21">
-      <summary>
- Link
- </summary>
-    </member>
-    <member name="F:NuGardt.Yourls.API.Result.Links.Link22">
-      <summary>
- Link
- </summary>
-    </member>
-    <member name="F:NuGardt.Yourls.API.Result.Links.Link23">
-      <summary>
- Link
- </summary>
-    </member>
-    <member name="F:NuGardt.Yourls.API.Result.Links.Link24">
-      <summary>
- Link
- </summary>
-    </member>
-    <member name="F:NuGardt.Yourls.API.Result.Links.Link25">
-      <summary>
- Link
- </summary>
-    </member>
-    <member name="F:NuGardt.Yourls.API.Result.Links.Link3">
-      <summary>
- Link
- </summary>
-    </member>
-    <member name="F:NuGardt.Yourls.API.Result.Links.Link4">
-      <summary>
- Link
- </summary>
-    </member>
-    <member name="F:NuGardt.Yourls.API.Result.Links.Link5">
-      <summary>
- Link
- </summary>
-    </member>
-    <member name="F:NuGardt.Yourls.API.Result.Links.Link6">
-      <summary>
- Link
- </summary>
-    </member>
-    <member name="F:NuGardt.Yourls.API.Result.Links.Link7">
-      <summary>
- Link
- </summary>
-    </member>
-    <member name="F:NuGardt.Yourls.API.Result.Links.Link8">
-      <summary>
- Link
- </summary>
-    </member>
-    <member name="F:NuGardt.Yourls.API.Result.Links.Link9">
-      <summary>
- Link
- </summary>
-    </member>
-    <member name="T:NuGardt.Yourls.API.Result.UrlData">
-      <summary>
- URL data.
- </summary>
-    </member>
-    <member name="M:NuGardt.Yourls.API.Result.UrlData.#ctor">
-      <summary>
-        <markup>
-          <include item="SMCAutoDocConstructor">
-            <parameter>NuGardt.Yourls.API.Result.UrlData</parameter>
-          </include>
-        </markup>
-      </summary>
-    </member>
-    <member name="F:NuGardt.Yourls.API.Result.UrlData.Clicks">
-      <summary>
- Returns or sets the total number of clicks of the short link.
- </summary>
-    </member>
-    <member name="F:NuGardt.Yourls.API.Result.UrlData.Date">
-      <summary>
- Returns or sets the creation date of the short link.
- </summary>
-    </member>
-    <member name="F:NuGardt.Yourls.API.Result.UrlData.Ip">
-      <summary>
- Returns or sets the IP of the creator of the short link.
- </summary>
-    </member>
-    <member name="F:NuGardt.Yourls.API.Result.UrlData.Keyword">
-      <summary>
- Returns or sets the keyword of the short link.
- </summary>
-    </member>
-    <member name="F:NuGardt.Yourls.API.Result.UrlData.Title">
-      <summary>
- Returns or sets the title of the short link.
- </summary>
-    </member>
-    <member name="F:NuGardt.Yourls.API.Result.UrlData.Url">
-      <summary>
- Returns or sets the short URL.
+ Returns or sets the status code of the API call. 200 = OK
  </summary>
     </member>
     <member name="T:NuGardt.Yourls.API.Result.YourlsCreateShortUrlResult">
@@ -555,11 +301,30 @@
         </markup>
       </summary>
     </member>
+    <member name="P:NuGardt.Yourls.API.Result.YourlsCreateShortUrlResult.NuGardt#API#Helper#JSON#IBaseResult#CacheExpires"></member>
+    <member name="P:NuGardt.Yourls.API.Result.YourlsCreateShortUrlResult.Callback">
+      <summary>
+ Returns or sets the callback of the API call.
+ </summary>
+    </member>
     <member name="F:NuGardt.Yourls.API.Result.YourlsCreateShortUrlResult.Code">
       <summary>
  Returns or sets the code.
  </summary>
     </member>
+    <member name="P:NuGardt.Yourls.API.Result.YourlsCreateShortUrlResult.ErrorCode">
+      <summary>
+ Returns or sets the error code of the API call.
+ </summary>
+    </member>
+    <member name="P:NuGardt.Yourls.API.Result.YourlsCreateShortUrlResult.HasError"></member>
+    <member name="P:NuGardt.Yourls.API.Result.YourlsCreateShortUrlResult.Message">
+      <summary>
+ Returns or sets the message of the API call.
+ </summary>
+    </member>
+    <member name="M:NuGardt.Yourls.API.Result.YourlsCreateShortUrlResult.NuGardt#API#Helper#JSON#IBaseResult#ReadHeader(System.Net.WebHeaderCollection)"></member>
+    <member name="P:NuGardt.Yourls.API.Result.YourlsCreateShortUrlResult.ResponseRaw"></member>
     <member name="F:NuGardt.Yourls.API.Result.YourlsCreateShortUrlResult.ShortUrl">
       <summary>
  Returns or sets the short URL.
@@ -570,11 +335,18 @@
  Returns or sets the status.
  </summary>
     </member>
+    <member name="P:NuGardt.Yourls.API.Result.YourlsCreateShortUrlResult.StatusCode">
+      <summary>
+ Returns or sets the status code of the API call. 200 = OK
+ </summary>
+    </member>
     <member name="F:NuGardt.Yourls.API.Result.YourlsCreateShortUrlResult.Title">
       <summary>
  Returns or sets the title of the short link.
  </summary>
     </member>
+    <member name="M:NuGardt.Yourls.API.Result.YourlsCreateShortUrlResult.ToException"></member>
+    <member name="M:NuGardt.Yourls.API.Result.YourlsCreateShortUrlResult.ToString"></member>
     <member name="F:NuGardt.Yourls.API.Result.YourlsCreateShortUrlResult.Url">
       <summary>
  Returns or sets the long URL.
@@ -594,6 +366,18 @@
         </markup>
       </summary>
     </member>
+    <member name="P:NuGardt.Yourls.API.Result.YourlsExpandShortUrlResult.NuGardt#API#Helper#JSON#IBaseResult#CacheExpires"></member>
+    <member name="P:NuGardt.Yourls.API.Result.YourlsExpandShortUrlResult.Callback">
+      <summary>
+ Returns or sets the callback of the API call.
+ </summary>
+    </member>
+    <member name="P:NuGardt.Yourls.API.Result.YourlsExpandShortUrlResult.ErrorCode">
+      <summary>
+ Returns or sets the error code of the API call.
+ </summary>
+    </member>
+    <member name="P:NuGardt.Yourls.API.Result.YourlsExpandShortUrlResult.HasError"></member>
     <member name="F:NuGardt.Yourls.API.Result.YourlsExpandShortUrlResult.Keyword">
       <summary>
  Returns the keyword of the short link.
@@ -604,11 +388,25 @@
  Returns the long URL.
  </summary>
     </member>
+    <member name="P:NuGardt.Yourls.API.Result.YourlsExpandShortUrlResult.Message">
+      <summary>
+ Returns or sets the message of the API call.
+ </summary>
+    </member>
+    <member name="M:NuGardt.Yourls.API.Result.YourlsExpandShortUrlResult.NuGardt#API#Helper#JSON#IBaseResult#ReadHeader(System.Net.WebHeaderCollection)"></member>
+    <member name="P:NuGardt.Yourls.API.Result.YourlsExpandShortUrlResult.ResponseRaw"></member>
     <member name="F:NuGardt.Yourls.API.Result.YourlsExpandShortUrlResult.ShortUrl">
       <summary>
  Returns the short URL.
  </summary>
     </member>
+    <member name="P:NuGardt.Yourls.API.Result.YourlsExpandShortUrlResult.StatusCode">
+      <summary>
+ Returns or sets the status code of the API call. 200 = OK
+ </summary>
+    </member>
+    <member name="M:NuGardt.Yourls.API.Result.YourlsExpandShortUrlResult.ToException"></member>
+    <member name="M:NuGardt.Yourls.API.Result.YourlsExpandShortUrlResult.ToString"></member>
     <member name="T:NuGardt.Yourls.API.Result.YourlsGetDatabaseStatsResult">
       <summary>
  YOURLS API response for requesting the database statistics.
@@ -623,11 +421,37 @@
         </markup>
       </summary>
     </member>
+    <member name="P:NuGardt.Yourls.API.Result.YourlsGetDatabaseStatsResult.NuGardt#API#Helper#JSON#IBaseResult#CacheExpires"></member>
+    <member name="P:NuGardt.Yourls.API.Result.YourlsGetDatabaseStatsResult.Callback">
+      <summary>
+ Returns or sets the callback of the API call.
+ </summary>
+    </member>
+    <member name="P:NuGardt.Yourls.API.Result.YourlsGetDatabaseStatsResult.ErrorCode">
+      <summary>
+ Returns or sets the error code of the API call.
+ </summary>
+    </member>
+    <member name="P:NuGardt.Yourls.API.Result.YourlsGetDatabaseStatsResult.HasError"></member>
+    <member name="P:NuGardt.Yourls.API.Result.YourlsGetDatabaseStatsResult.Message">
+      <summary>
+ Returns or sets the message of the API call.
+ </summary>
+    </member>
+    <member name="M:NuGardt.Yourls.API.Result.YourlsGetDatabaseStatsResult.NuGardt#API#Helper#JSON#IBaseResult#ReadHeader(System.Net.WebHeaderCollection)"></member>
+    <member name="P:NuGardt.Yourls.API.Result.YourlsGetDatabaseStatsResult.ResponseRaw"></member>
     <member name="F:NuGardt.Yourls.API.Result.YourlsGetDatabaseStatsResult.Stats">
       <summary>
  Returns or sets the database statistics.
  </summary>
     </member>
+    <member name="P:NuGardt.Yourls.API.Result.YourlsGetDatabaseStatsResult.StatusCode">
+      <summary>
+ Returns or sets the status code of the API call. 200 = OK
+ </summary>
+    </member>
+    <member name="M:NuGardt.Yourls.API.Result.YourlsGetDatabaseStatsResult.ToException"></member>
+    <member name="M:NuGardt.Yourls.API.Result.YourlsGetDatabaseStatsResult.ToString"></member>
     <member name="T:NuGardt.Yourls.API.Result.YourlsGetStatsResult">
       <summary>
  YOURLS API response.
@@ -642,16 +466,42 @@
         </markup>
       </summary>
     </member>
+    <member name="P:NuGardt.Yourls.API.Result.YourlsGetStatsResult.NuGardt#API#Helper#JSON#IBaseResult#CacheExpires"></member>
+    <member name="P:NuGardt.Yourls.API.Result.YourlsGetStatsResult.Callback">
+      <summary>
+ Returns or sets the callback of the API call.
+ </summary>
+    </member>
+    <member name="P:NuGardt.Yourls.API.Result.YourlsGetStatsResult.ErrorCode">
+      <summary>
+ Returns or sets the error code of the API call.
+ </summary>
+    </member>
+    <member name="P:NuGardt.Yourls.API.Result.YourlsGetStatsResult.HasError"></member>
     <member name="F:NuGardt.Yourls.API.Result.YourlsGetStatsResult.Links">
       <summary>
  Returns or sets the links.
  </summary>
     </member>
+    <member name="P:NuGardt.Yourls.API.Result.YourlsGetStatsResult.Message">
+      <summary>
+ Returns or sets the message of the API call.
+ </summary>
+    </member>
+    <member name="M:NuGardt.Yourls.API.Result.YourlsGetStatsResult.NuGardt#API#Helper#JSON#IBaseResult#ReadHeader(System.Net.WebHeaderCollection)"></member>
+    <member name="P:NuGardt.Yourls.API.Result.YourlsGetStatsResult.ResponseRaw"></member>
     <member name="F:NuGardt.Yourls.API.Result.YourlsGetStatsResult.Stats">
       <summary>
  Returns or sets the Database statistics.
  </summary>
     </member>
+    <member name="P:NuGardt.Yourls.API.Result.YourlsGetStatsResult.StatusCode">
+      <summary>
+ Returns or sets the status code of the API call. 200 = OK
+ </summary>
+    </member>
+    <member name="M:NuGardt.Yourls.API.Result.YourlsGetStatsResult.ToException"></member>
+    <member name="M:NuGardt.Yourls.API.Result.YourlsGetStatsResult.ToString"></member>
     <member name="T:NuGardt.Yourls.API.Result.YourlsGetUrlStatsResult">
       <summary>
  YOURLS API response.
@@ -666,43 +516,290 @@
         </markup>
       </summary>
     </member>
+    <member name="P:NuGardt.Yourls.API.Result.YourlsGetUrlStatsResult.NuGardt#API#Helper#JSON#IBaseResult#CacheExpires"></member>
+    <member name="P:NuGardt.Yourls.API.Result.YourlsGetUrlStatsResult.Callback">
+      <summary>
+ Returns or sets the callback of the API call.
+ </summary>
+    </member>
+    <member name="P:NuGardt.Yourls.API.Result.YourlsGetUrlStatsResult.ErrorCode">
+      <summary>
+ Returns or sets the error code of the API call.
+ </summary>
+    </member>
+    <member name="P:NuGardt.Yourls.API.Result.YourlsGetUrlStatsResult.HasError"></member>
     <member name="F:NuGardt.Yourls.API.Result.YourlsGetUrlStatsResult.Link">
       <summary>
  Returns or sets the links.
  </summary>
     </member>
-    <member name="T:NuGardt.Yourls.API.Result.YourlsResult">
-      <summary>
- YOURLS API response.
- </summary>
-    </member>
-    <member name="M:NuGardt.Yourls.API.Result.YourlsResult.#ctor">
-      <summary>
-        <markup>
-          <include item="SMCAutoDocConstructor">
-            <parameter>NuGardt.Yourls.API.Result.YourlsResult</parameter>
-          </include>
-        </markup>
-      </summary>
-    </member>
-    <member name="F:NuGardt.Yourls.API.Result.YourlsResult.Callback">
-      <summary>
- Returns or sets the callback of the API call.
- </summary>
-    </member>
-    <member name="F:NuGardt.Yourls.API.Result.YourlsResult.ErrorCode">
-      <summary>
- Returns or sets the error code of the API call.
- </summary>
-    </member>
-    <member name="F:NuGardt.Yourls.API.Result.YourlsResult.Message">
+    <member name="P:NuGardt.Yourls.API.Result.YourlsGetUrlStatsResult.Message">
       <summary>
  Returns or sets the message of the API call.
  </summary>
     </member>
-    <member name="F:NuGardt.Yourls.API.Result.YourlsResult.StatusCode">
+    <member name="M:NuGardt.Yourls.API.Result.YourlsGetUrlStatsResult.NuGardt#API#Helper#JSON#IBaseResult#ReadHeader(System.Net.WebHeaderCollection)"></member>
+    <member name="P:NuGardt.Yourls.API.Result.YourlsGetUrlStatsResult.ResponseRaw"></member>
+    <member name="P:NuGardt.Yourls.API.Result.YourlsGetUrlStatsResult.StatusCode">
       <summary>
  Returns or sets the status code of the API call. 200 = OK
+ </summary>
+    </member>
+    <member name="M:NuGardt.Yourls.API.Result.YourlsGetUrlStatsResult.ToException"></member>
+    <member name="M:NuGardt.Yourls.API.Result.YourlsGetUrlStatsResult.ToString"></member>
+    <member name="T:NuGardt.Yourls.API.Result.Element.YourlsDatabaseStats">
+      <summary>
+ Database Stats.
+ </summary>
+    </member>
+    <member name="M:NuGardt.Yourls.API.Result.Element.YourlsDatabaseStats.#ctor">
+      <summary>
+        <markup>
+          <include item="SMCAutoDocConstructor">
+            <parameter>NuGardt.Yourls.API.Result.Element.YourlsDatabaseStats</parameter>
+          </include>
+        </markup>
+      </summary>
+    </member>
+    <member name="M:NuGardt.Yourls.API.Result.Element.YourlsDatabaseStats.ToString"></member>
+    <member name="F:NuGardt.Yourls.API.Result.Element.YourlsDatabaseStats.TotalClicks">
+      <summary>
+ Returns or sets the total number of clicks on the YOURLS server.
+ </summary>
+    </member>
+    <member name="F:NuGardt.Yourls.API.Result.Element.YourlsDatabaseStats.TotalLinks">
+      <summary>
+ Returns or sets the total number of link on the YOURLS server.
+ </summary>
+    </member>
+    <member name="T:NuGardt.Yourls.API.Result.Element.YourlsLinkData">
+      <summary>
+ Link data.
+ </summary>
+    </member>
+    <member name="M:NuGardt.Yourls.API.Result.Element.YourlsLinkData.#ctor">
+      <summary>
+        <markup>
+          <include item="SMCAutoDocConstructor">
+            <parameter>NuGardt.Yourls.API.Result.Element.YourlsLinkData</parameter>
+          </include>
+        </markup>
+      </summary>
+    </member>
+    <member name="F:NuGardt.Yourls.API.Result.Element.YourlsLinkData.Clicks">
+      <summary>
+ Returns or sets the total number clicks of this short link.
+ </summary>
+    </member>
+    <member name="F:NuGardt.Yourls.API.Result.Element.YourlsLinkData.Ip">
+      <summary>
+ Returns or sets the IP address of the creator of the short link.
+ </summary>
+    </member>
+    <member name="F:NuGardt.Yourls.API.Result.Element.YourlsLinkData.ShortUrl">
+      <summary>
+ Returns or sets the short RL.
+ </summary>
+    </member>
+    <member name="F:NuGardt.Yourls.API.Result.Element.YourlsLinkData.Timestamp">
+      <summary>
+ Returns or sets the timestamp of creation.
+ </summary>
+    </member>
+    <member name="F:NuGardt.Yourls.API.Result.Element.YourlsLinkData.Title">
+      <summary>
+ Returns or sets the title of the short link.
+ </summary>
+    </member>
+    <member name="M:NuGardt.Yourls.API.Result.Element.YourlsLinkData.ToString"></member>
+    <member name="F:NuGardt.Yourls.API.Result.Element.YourlsLinkData.Url">
+      <summary>
+ Returns or sets the long URL.
+ </summary>
+    </member>
+    <member name="T:NuGardt.Yourls.API.Result.Element.YourlsLinks">
+      <summary>
+ Link 'pseudo-arrray' data.
+ </summary>
+    </member>
+    <member name="M:NuGardt.Yourls.API.Result.Element.YourlsLinks.#ctor">
+      <summary>
+        <markup>
+          <include item="SMCAutoDocConstructor">
+            <parameter>NuGardt.Yourls.API.Result.Element.YourlsLinks</parameter>
+          </include>
+        </markup>
+      </summary>
+    </member>
+    <member name="F:NuGardt.Yourls.API.Result.Element.YourlsLinks.Link1">
+      <summary>
+ Link
+ </summary>
+    </member>
+    <member name="F:NuGardt.Yourls.API.Result.Element.YourlsLinks.Link10">
+      <summary>
+ Link
+ </summary>
+    </member>
+    <member name="F:NuGardt.Yourls.API.Result.Element.YourlsLinks.Link11">
+      <summary>
+ Link
+ </summary>
+    </member>
+    <member name="F:NuGardt.Yourls.API.Result.Element.YourlsLinks.Link12">
+      <summary>
+ Link
+ </summary>
+    </member>
+    <member name="F:NuGardt.Yourls.API.Result.Element.YourlsLinks.Link13">
+      <summary>
+ Link
+ </summary>
+    </member>
+    <member name="F:NuGardt.Yourls.API.Result.Element.YourlsLinks.Link14">
+      <summary>
+ Link
+ </summary>
+    </member>
+    <member name="F:NuGardt.Yourls.API.Result.Element.YourlsLinks.Link15">
+      <summary>
+ Link
+ </summary>
+    </member>
+    <member name="F:NuGardt.Yourls.API.Result.Element.YourlsLinks.Link16">
+      <summary>
+ Link
+ </summary>
+    </member>
+    <member name="F:NuGardt.Yourls.API.Result.Element.YourlsLinks.Link17">
+      <summary>
+ Link
+ </summary>
+    </member>
+    <member name="F:NuGardt.Yourls.API.Result.Element.YourlsLinks.Link18">
+      <summary>
+ Link
+ </summary>
+    </member>
+    <member name="F:NuGardt.Yourls.API.Result.Element.YourlsLinks.Link19">
+      <summary>
+ Link
+ </summary>
+    </member>
+    <member name="F:NuGardt.Yourls.API.Result.Element.YourlsLinks.Link2">
+      <summary>
+ Link
+ </summary>
+    </member>
+    <member name="F:NuGardt.Yourls.API.Result.Element.YourlsLinks.Link20">
+      <summary>
+ Link
+ </summary>
+    </member>
+    <member name="F:NuGardt.Yourls.API.Result.Element.YourlsLinks.Link21">
+      <summary>
+ Link
+ </summary>
+    </member>
+    <member name="F:NuGardt.Yourls.API.Result.Element.YourlsLinks.Link22">
+      <summary>
+ Link
+ </summary>
+    </member>
+    <member name="F:NuGardt.Yourls.API.Result.Element.YourlsLinks.Link23">
+      <summary>
+ Link
+ </summary>
+    </member>
+    <member name="F:NuGardt.Yourls.API.Result.Element.YourlsLinks.Link24">
+      <summary>
+ Link
+ </summary>
+    </member>
+    <member name="F:NuGardt.Yourls.API.Result.Element.YourlsLinks.Link25">
+      <summary>
+ Link
+ </summary>
+    </member>
+    <member name="F:NuGardt.Yourls.API.Result.Element.YourlsLinks.Link3">
+      <summary>
+ Link
+ </summary>
+    </member>
+    <member name="F:NuGardt.Yourls.API.Result.Element.YourlsLinks.Link4">
+      <summary>
+ Link
+ </summary>
+    </member>
+    <member name="F:NuGardt.Yourls.API.Result.Element.YourlsLinks.Link5">
+      <summary>
+ Link
+ </summary>
+    </member>
+    <member name="F:NuGardt.Yourls.API.Result.Element.YourlsLinks.Link6">
+      <summary>
+ Link
+ </summary>
+    </member>
+    <member name="F:NuGardt.Yourls.API.Result.Element.YourlsLinks.Link7">
+      <summary>
+ Link
+ </summary>
+    </member>
+    <member name="F:NuGardt.Yourls.API.Result.Element.YourlsLinks.Link8">
+      <summary>
+ Link
+ </summary>
+    </member>
+    <member name="F:NuGardt.Yourls.API.Result.Element.YourlsLinks.Link9">
+      <summary>
+ Link
+ </summary>
+    </member>
+    <member name="M:NuGardt.Yourls.API.Result.Element.YourlsLinks.ToString"></member>
+    <member name="T:NuGardt.Yourls.API.Result.Element.YourlsUrlData">
+      <summary>
+ URL data.
+ </summary>
+    </member>
+    <member name="M:NuGardt.Yourls.API.Result.Element.YourlsUrlData.#ctor">
+      <summary>
+        <markup>
+          <include item="SMCAutoDocConstructor">
+            <parameter>NuGardt.Yourls.API.Result.Element.YourlsUrlData</parameter>
+          </include>
+        </markup>
+      </summary>
+    </member>
+    <member name="F:NuGardt.Yourls.API.Result.Element.YourlsUrlData.Clicks">
+      <summary>
+ Returns or sets the total number of clicks of the short link.
+ </summary>
+    </member>
+    <member name="F:NuGardt.Yourls.API.Result.Element.YourlsUrlData.Date">
+      <summary>
+ Returns or sets the creation date of the short link.
+ </summary>
+    </member>
+    <member name="F:NuGardt.Yourls.API.Result.Element.YourlsUrlData.Ip">
+      <summary>
+ Returns or sets the IP of the creator of the short link.
+ </summary>
+    </member>
+    <member name="F:NuGardt.Yourls.API.Result.Element.YourlsUrlData.Keyword">
+      <summary>
+ Returns or sets the keyword of the short link.
+ </summary>
+    </member>
+    <member name="F:NuGardt.Yourls.API.Result.Element.YourlsUrlData.Title">
+      <summary>
+ Returns or sets the title of the short link.
+ </summary>
+    </member>
+    <member name="M:NuGardt.Yourls.API.Result.Element.YourlsUrlData.ToString"></member>
+    <member name="F:NuGardt.Yourls.API.Result.Element.YourlsUrlData.Url">
+      <summary>
+ Returns or sets the short URL.
  </summary>
     </member>
   </members>
