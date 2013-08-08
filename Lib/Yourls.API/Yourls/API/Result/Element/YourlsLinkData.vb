@@ -16,14 +16,15 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 '
 Imports System.Runtime.Serialization
+Imports System.Text
 
-Namespace Yourls.API.Result
+Namespace Yourls.API.Result.Element
   ''' <summary>
   ''' Link data.
   ''' </summary>
   ''' <remarks></remarks>
   <DataContract()>
-  Public Class LinkData
+  Public Class YourlsLinkData
     ''' <summary>
     ''' Returns or sets the short RL.
     ''' </summary>
@@ -65,5 +66,20 @@ Namespace Yourls.API.Result
     ''' <remarks></remarks>
     <DataMember(Name := "clicks")>
     Public Clicks As Int32
+
+    Public Overrides Function ToString() As String
+      Dim SB As New StringBuilder
+
+      With SB
+        Call .AppendFormat("Short URL: {0}{1}", Me.ShortUrl, vbCrLf)
+        Call .AppendFormat("Url: {0}{1}", Me.Url, vbCrLf)
+        Call .AppendFormat("Title: {0}{1}", Me.Title, vbCrLf)
+        Call .AppendFormat("Timestamp: {0}{1}", Me.Timestamp, vbCrLf)
+        Call .AppendFormat("IP: {0}{1}", Me.Ip, vbCrLf)
+        Call .AppendFormat("Clicks: {0}{1}", Me.Clicks.ToString(), vbCrLf)
+      End With
+
+      Return SB.ToString()
+    End Function
   End Class
 End Namespace

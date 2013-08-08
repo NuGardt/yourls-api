@@ -16,14 +16,10 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 '
 Imports System.Runtime.InteropServices
-Imports System.Net
 Imports System.Security.Cryptography
-Imports System.IO
-Imports System.Runtime.Serialization.Json
+Imports NuGardt.API.Helper.JSON
 Imports NuGardt.Yourls.API.Result
-Imports System.Threading
 Imports System.Text
-Imports System.Web
 
 Namespace Yourls.API
   ''' <summary>
@@ -45,6 +41,8 @@ Namespace Yourls.API
     Private Const ActionGetStats As String = "stats"
     Private Const ActionGetDatabaseStats As String = "db-stats"
 
+    Private ReadOnly Query As JsonHelper(Of IYourlsBaseResult)
+
     ''' <summary>
     ''' Contructor
     ''' </summary>
@@ -52,6 +50,8 @@ Namespace Yourls.API
     ''' <remarks></remarks>
     Public Sub New(ByVal ApiUrl As String)
       Me.ApiUrl = ApiUrl
+
+      Me.Query = New JsonHelper(Of IYourlsBaseResult)(False)
     End Sub
 
 #Region "Function CreateShortUrl"
@@ -79,19 +79,17 @@ Namespace Yourls.API
       ElseIf (Authentication Is Nothing) Then
         Ex = New ArgumentNullException("Authentication")
       Else
-        Dim SB As New StringBuilder
+        Dim RequestData As New StringBuilder
 
-        Call SB.Append(Me.ApiUrl)
-        Call SB.AppendFormat("?action={0}", ActionCreateShortUrl)
-        Call SB.AppendFormat("&format={0}", ResponseFormat)
-        Call SB.AppendFormat("&url={0}", HttpUtility.UrlEncode(LongUrl))
+        Call RequestData.AppendFormat("format={0}", ResponseFormat)
+        Call RequestData.AppendFormat("&url={0}", LongUrl)
 
-        If (Not String.IsNullOrEmpty(Keyword)) Then Call SB.AppendFormat("&keyword={0}", HttpUtility.UrlEncode(Keyword))
-        If (Not String.IsNullOrEmpty(Title)) Then Call SB.AppendFormat("&title={0}", HttpUtility.UrlEncode(Title))
+        If (Not String.IsNullOrEmpty(Keyword)) Then Call RequestData.AppendFormat("&keyword={0}", Keyword)
+        If (Not String.IsNullOrEmpty(Title)) Then Call RequestData.AppendFormat("&title={0}", Title)
 
-        Call SB.Append(GetAuthenticationDetails(Authentication))
+        Call RequestData.Append(GetAuthenticationDetails(Authentication))
 
-        Result = QueryAndParse(Of YourlsCreateShortUrlResult)(SB.ToString(), Ex)
+        Result = Me.Query.QueryAndParse(Of YourlsCreateShortUrlResult)(eRequestMethod.Post, String.Format("{0}?action={1}", Me.ApiUrl, ActionCreateShortUrl), RequestData.ToString(), Ex := Ex)
       End If
 
       Return Ex
@@ -119,19 +117,17 @@ Namespace Yourls.API
       ElseIf (Authentication Is Nothing) Then
         Return Callback.BeginInvoke(Nothing, Nothing, New NullReferenceException("Authentication"))
       Else
-        Dim SB As New StringBuilder
+        Dim RequestData As New StringBuilder
 
-        Call SB.Append(Me.ApiUrl)
-        Call SB.AppendFormat("?action={0}", ActionCreateShortUrl)
-        Call SB.AppendFormat("&format={0}", ResponseFormat)
-        Call SB.AppendFormat("&url={0}", HttpUtility.UrlEncode(LongUrl))
+        Call RequestData.AppendFormat("format={0}", ResponseFormat)
+        Call RequestData.AppendFormat("&url={0}", LongUrl)
 
-        If (Not String.IsNullOrEmpty(Keyword)) Then Call SB.AppendFormat("&keyword={0}", HttpUtility.UrlEncode(Keyword))
-        If (Not String.IsNullOrEmpty(Title)) Then Call SB.AppendFormat("&title={0}", HttpUtility.UrlEncode(Title))
+        If (Not String.IsNullOrEmpty(Keyword)) Then Call RequestData.AppendFormat("&keyword={0}", Keyword)
+        If (Not String.IsNullOrEmpty(Title)) Then Call RequestData.AppendFormat("&title={0}", Title)
 
-        Call SB.Append(GetAuthenticationDetails(Authentication))
+        Call RequestData.Append(GetAuthenticationDetails(Authentication))
 
-        Return QueryAndParseBegin(Key, SB.ToString(), Callback)
+        Return Me.Query.QueryAndParseBegin(Key, eRequestMethod.Post, String.Format("{0}?action={1}", Me.ApiUrl, ActionCreateShortUrl), RequestData.ToString(), Callback)
       End If
     End Function
 
@@ -146,7 +142,7 @@ Namespace Yourls.API
     Public Function CreateShortUrlEnd(ByVal Result As IAsyncResult,
                                       <Out()> ByRef Key As Object,
                                       <Out()> ByRef Response As YourlsCreateShortUrlResult) As Exception
-      Return QueryAndParseEnd(Result, Key, Response)
+      Return Me.Query.QueryAndParseEnd(Result, Key, Response)
     End Function
 
 #End Region
@@ -170,16 +166,14 @@ Namespace Yourls.API
       If String.IsNullOrEmpty(ShortUrl) Then
         Ex = New ArgumentNullException("ShortUrl")
       Else
-        Dim SB As New StringBuilder
+        Dim RequestData As New StringBuilder
 
-        Call SB.Append(Me.ApiUrl)
-        Call SB.AppendFormat("?action={0}", ActionExpandShortUrl)
-        Call SB.AppendFormat("&format={0}", ResponseFormat)
-        Call SB.AppendFormat("&shorturl={0}", HttpUtility.UrlEncode(ShortUrl))
+        Call RequestData.AppendFormat("format={0}", ResponseFormat)
+        Call RequestData.AppendFormat("&shorturl={0}", ShortUrl)
 
-        Call SB.Append(GetAuthenticationDetails(Authentication))
+        Call RequestData.Append(GetAuthenticationDetails(Authentication))
 
-        Result = QueryAndParse(Of YourlsExpandShortUrlResult)(SB.ToString(), Ex)
+        Result = Me.Query.QueryAndParse(Of YourlsExpandShortUrlResult)(eRequestMethod.Post, String.Format("{0}?action={1}", Me.ApiUrl, ActionExpandShortUrl), RequestData.ToString(), Ex := Ex)
       End If
 
       Return Ex
@@ -201,16 +195,14 @@ Namespace Yourls.API
       If String.IsNullOrEmpty(ShortUrl) Then
         Return Callback.BeginInvoke(Nothing, Nothing, New NullReferenceException("Url"))
       Else
-        Dim SB As New StringBuilder
+        Dim RequestData As New StringBuilder
 
-        Call SB.Append(Me.ApiUrl)
-        Call SB.AppendFormat("?action={0}", ActionExpandShortUrl)
-        Call SB.AppendFormat("&format={0}", ResponseFormat)
-        Call SB.AppendFormat("&shorturl={0}", HttpUtility.UrlEncode(ShortUrl))
+        Call RequestData.AppendFormat("format={0}", ResponseFormat)
+        Call RequestData.AppendFormat("&shorturl={0}", ShortUrl)
 
-        Call SB.Append(GetAuthenticationDetails(Authentication))
+        Call RequestData.Append(GetAuthenticationDetails(Authentication))
 
-        Return QueryAndParseBegin(Key, SB.ToString(), Callback)
+        Return Me.Query.QueryAndParseBegin(Key, eRequestMethod.Post, String.Format("{0}?action={1}", Me.ApiUrl, ActionExpandShortUrl), RequestData.ToString(), Callback)
       End If
     End Function
 
@@ -225,7 +217,7 @@ Namespace Yourls.API
     Public Function ExpandShortUrlEnd(ByVal Result As IAsyncResult,
                                       <Out()> ByRef Key As Object,
                                       <Out()> ByRef Response As YourlsExpandShortUrlResult) As Exception
-      Return QueryAndParseEnd(Result, Key, Response)
+      Return Me.Query.QueryAndParseEnd(Result, Key, Response)
     End Function
 
 #End Region
@@ -249,16 +241,14 @@ Namespace Yourls.API
       If String.IsNullOrEmpty(ShortUrl) Then
         Ex = New ArgumentNullException("ShortUrl")
       Else
-        Dim SB As New StringBuilder
+        Dim RequestData As New StringBuilder
 
-        Call SB.Append(Me.ApiUrl)
-        Call SB.AppendFormat("?action={0}", ActionGetUrlStats)
-        Call SB.AppendFormat("&format={0}", ResponseFormat)
-        Call SB.AppendFormat("&shorturl={0}", HttpUtility.UrlEncode(ShortUrl))
+        Call RequestData.AppendFormat("format={0}", ResponseFormat)
+        Call RequestData.AppendFormat("&shorturl={0}", ShortUrl)
 
-        Call SB.Append(GetAuthenticationDetails(Authentication))
+        Call RequestData.Append(GetAuthenticationDetails(Authentication))
 
-        Result = QueryAndParse(Of YourlsGetUrlStatsResult)(SB.ToString(), Ex)
+        Result = Me.Query.QueryAndParse(Of YourlsGetUrlStatsResult)(eRequestMethod.Post, String.Format("{0}?action={1}", Me.ApiUrl, ActionGetUrlStats), RequestData.ToString(), Ex := Ex)
       End If
 
       Return Ex
@@ -280,16 +270,14 @@ Namespace Yourls.API
       If String.IsNullOrEmpty(ShortUrl) Then
         Return Callback.BeginInvoke(Nothing, Nothing, New NullReferenceException("Url"))
       Else
-        Dim SB As New StringBuilder
+        Dim RequestData As New StringBuilder
 
-        Call SB.Append(Me.ApiUrl)
-        Call SB.AppendFormat("?action={0}", ActionGetUrlStats)
-        Call SB.AppendFormat("&format={0}", ResponseFormat)
-        Call SB.AppendFormat("&shorturl={0}", HttpUtility.UrlEncode(ShortUrl))
+        Call RequestData.AppendFormat("format={0}", ResponseFormat)
+        Call RequestData.AppendFormat("&shorturl={0}", ShortUrl)
 
-        Call SB.Append(GetAuthenticationDetails(Authentication))
+        Call RequestData.Append(GetAuthenticationDetails(Authentication))
 
-        Return QueryAndParseBegin(Key, SB.ToString(), Callback)
+        Return Me.Query.QueryAndParseBegin(Key, eRequestMethod.Post, String.Format("{0}?action={1}", Me.ApiUrl, ActionGetUrlStats), RequestData.ToString(), Callback)
       End If
     End Function
 
@@ -304,7 +292,7 @@ Namespace Yourls.API
     Public Function GetUrlStatsEnd(ByVal Result As IAsyncResult,
                                    <Out()> ByRef Key As Object,
                                    <Out()> ByRef Response As YourlsGetUrlStatsResult) As Exception
-      Return QueryAndParseEnd(Result, Key, Response)
+      Return Me.Query.QueryAndParseEnd(Result, Key, Response)
     End Function
 
 #End Region
@@ -326,17 +314,15 @@ Namespace Yourls.API
                              <Out()> ByRef Result As YourlsGetStatsResult) As Exception
       Dim Ex As Exception = Nothing
 
-      Dim SB As New StringBuilder
+      Dim RequestData As New StringBuilder
 
-      Call SB.Append(Me.ApiUrl)
-      Call SB.AppendFormat("?action={0}", ActionGetStats)
-      Call SB.AppendFormat("&format={0}", ResponseFormat)
-      Call SB.AppendFormat("&filter={0}", HttpUtility.UrlEncode(Filter.ToString()))
-      Call SB.AppendFormat("&limit={0}", Limit.ToString())
+      Call RequestData.AppendFormat("format={0}", ResponseFormat)
+      Call RequestData.AppendFormat("&filter={0}", Filter.ToString())
+      Call RequestData.AppendFormat("&limit={0}", Limit.ToString())
 
-      Call SB.Append(GetAuthenticationDetails(Authentication))
+      Call RequestData.Append(GetAuthenticationDetails(Authentication))
 
-      Result = QueryAndParse(Of YourlsGetStatsResult)(SB.ToString(), Ex)
+      Result = Me.Query.QueryAndParse(Of YourlsGetStatsResult)(eRequestMethod.Post, String.Format("{0}?action={1}", Me.ApiUrl, ActionGetStats), RequestData.ToString(), Ex := Ex)
 
       Return Ex
     End Function
@@ -356,17 +342,15 @@ Namespace Yourls.API
                                   ByVal Limit As Int32,
                                   ByVal Authentication As IYourlsAuthentication,
                                   ByVal Callback As AsyncCallback) As IAsyncResult
-      Dim SB As New StringBuilder
+      Dim RequestData As New StringBuilder
 
-      Call SB.Append(Me.ApiUrl)
-      Call SB.AppendFormat("?action={0}", ActionGetStats)
-      Call SB.AppendFormat("&format={0}", ResponseFormat)
-      Call SB.AppendFormat("&filter={0}", HttpUtility.UrlEncode(Filter.ToString()))
-      Call SB.AppendFormat("&limit={0}", Limit.ToString())
+      Call RequestData.AppendFormat("format={0}", ResponseFormat)
+      Call RequestData.AppendFormat("&filter={0}", Filter.ToString())
+      Call RequestData.AppendFormat("&limit={0}", Limit.ToString())
 
-      Call SB.Append(GetAuthenticationDetails(Authentication))
+      Call RequestData.Append(GetAuthenticationDetails(Authentication))
 
-      Return QueryAndParseBegin(Key, SB.ToString(), Callback)
+      Return Me.Query.QueryAndParseBegin(Key, eRequestMethod.Post, String.Format("{0}?action={1}", Me.ApiUrl, ActionGetStats), RequestData.ToString(), Callback)
     End Function
 
     ''' <summary>
@@ -380,7 +364,7 @@ Namespace Yourls.API
     Public Function GetStatsEnd(ByVal Result As IAsyncResult,
                                 <Out()> ByRef Key As Object,
                                 <Out()> ByRef Response As YourlsGetStatsResult) As Exception
-      Return QueryAndParseEnd(Result, Key, Response)
+      Return Me.Query.QueryAndParseEnd(Result, Key, Response)
     End Function
 
 #End Region
@@ -397,16 +381,12 @@ Namespace Yourls.API
     Public Function GetDatabaseStats(ByVal Authentication As IYourlsAuthentication,
                                      <Out()> ByRef Result As YourlsGetDatabaseStatsResult) As Exception
       Dim Ex As Exception = Nothing
+      Dim RequestData As New StringBuilder
 
-      Dim SB As New StringBuilder
+      Call RequestData.AppendFormat("format={0}", ResponseFormat)
+      Call RequestData.Append(GetAuthenticationDetails(Authentication))
 
-      Call SB.Append(Me.ApiUrl)
-      Call SB.AppendFormat("?action={0}", ActionGetDatabaseStats)
-      Call SB.AppendFormat("&format={0}", ResponseFormat)
-
-      Call SB.Append(GetAuthenticationDetails(Authentication))
-
-      Result = QueryAndParse(Of YourlsGetDatabaseStatsResult)(SB.ToString(), Ex)
+      Result = Me.Query.QueryAndParse(Of YourlsGetDatabaseStatsResult)(eRequestMethod.Post, String.Format("{0}?action={1}", Me.ApiUrl, ActionGetDatabaseStats), RequestData.ToString(), Ex := Ex)
 
       Return Ex
     End Function
@@ -422,15 +402,12 @@ Namespace Yourls.API
     Public Function GetDatabaseStatsBegin(ByVal Key As Object,
                                           ByVal Authentication As IYourlsAuthentication,
                                           ByVal Callback As AsyncCallback) As IAsyncResult
-      Dim SB As New StringBuilder
+      Dim RequestData As New StringBuilder
 
-      Call SB.Append(Me.ApiUrl)
-      Call SB.AppendFormat("?action={0}", ActionGetDatabaseStats)
-      Call SB.AppendFormat("&format={0}", ResponseFormat)
+      Call RequestData.AppendFormat("format={0}", ResponseFormat)
+      Call RequestData.Append(GetAuthenticationDetails(Authentication))
 
-      Call SB.Append(GetAuthenticationDetails(Authentication))
-
-      Return QueryAndParseBegin(Key, SB.ToString(), Callback)
+      Return Me.Query.QueryAndParseBegin(Key, eRequestMethod.Post, String.Format("{0}?action={1}", Me.ApiUrl, ActionGetDatabaseStats), RequestData.ToString(), Callback)
     End Function
 
     ''' <summary>
@@ -444,7 +421,7 @@ Namespace Yourls.API
     Public Function GetDatabaseStatsEnd(ByVal Result As IAsyncResult,
                                         <Out()> ByRef Key As Object,
                                         <Out()> ByRef Response As YourlsGetDatabaseStatsResult) As Exception
-      Return QueryAndParseEnd(Result, Key, Response)
+      Return Me.Query.QueryAndParseEnd(Result, Key, Response)
     End Function
 
 #End Region
@@ -468,240 +445,15 @@ Namespace Yourls.API
 
           Call SB.AppendFormat("&signature={0}&timestamp={1}", HashedSignature, Authentication.UnixTimestamp.Value.ToString())
         Else
-          Call SB.AppendFormat("&signature={0}", HttpUtility.UrlEncode(Authentication.Signature))
+          Call SB.AppendFormat("&signature={0}", Authentication.Signature)
         End If
       Else
         'Username/Password
-        Call SB.AppendFormat("&username={0}", HttpUtility.UrlEncode(Authentication.Username))
-        Call SB.AppendFormat("&password={0}", HttpUtility.UrlEncode(Authentication.Password))
+        Call SB.AppendFormat("&username={0}", Authentication.Username)
+        Call SB.AppendFormat("&password={0}", Authentication.Password)
       End If
 
       Return SB.ToString()
-    End Function
-
-    ''' <summary>
-    ''' Queries the URL and returns the parsed response.
-    ''' </summary>
-    ''' <param name="URL">The query URL.</param>
-    ''' <param name="Ex">Contains an Exception if an error occurred otherwise <c>Nothing</c>.</param>
-    ''' <returns>Returns the response. May be <c>Nothing</c> if a critical error occurred.</returns>
-    ''' <remarks></remarks>
-    Private Function QueryAndParse(Of TItem As YourlsResult)(ByVal URL As String,
-                                                             <Out()> ByRef Ex As Exception) As TItem
-      Ex = Nothing
-      Dim Result As TItem = Nothing
-      Dim Request As WebRequest
-      Dim ResponseStream As Stream
-      Dim Response As WebResponse
-
-      Try
-        Request = HttpWebRequest.Create(URL)
-
-        Response = Request.GetResponse()
-        ResponseStream = Response.GetResponseStream()
-
-        'Create Serilizer
-        Dim Serializer As New DataContractJsonSerializer(GetType(TItem))
-
-        'Deserialize
-        Result = DirectCast(Serializer.ReadObject(ResponseStream), TItem)
-
-        'Close stream
-        Call ResponseStream.Close()
-        Call ResponseStream.Dispose()
-
-        'Close response
-        Call Response.Close()
-      Catch iEx As WebException
-        Try
-          Dim WebEx As WebException = iEx
-
-          If (WebEx.Response IsNot Nothing) Then
-            ResponseStream = WebEx.Response.GetResponseStream()
-
-            'Create Serilizer
-            Dim Serializer As New DataContractJsonSerializer(GetType(TItem))
-
-            Result = DirectCast(Serializer.ReadObject(ResponseStream), TItem)
-
-            'Close stream
-            Call ResponseStream.Close()
-            Call ResponseStream.Dispose()
-
-            'Close response
-            Call WebEx.Response.Close()
-          End If
-
-          Ex = iEx
-        Catch iiEx As Exception
-          Ex = iiEx
-        End Try
-      Catch iEx As Exception
-        Ex = iEx
-      End Try
-
-      Return Result
-    End Function
-
-#Region "Class AsyncStateWithKey"
-
-    Private NotInheritable Class AsyncStateWithKey
-      Public ReadOnly Key As Object
-      Public ReadOnly Request As WebRequest
-
-      Public Sub New(ByVal Key As Object,
-                     ByVal State As WebRequest)
-        Me.Key = Key
-        Me.Request = State
-      End Sub
-    End Class
-
-#End Region
-
-#Region "Class StateAsyncResult"
-
-    Private NotInheritable Class StateAsyncResult
-      Implements IAsyncResult
-
-      Private ReadOnly m_AsyncState As Object
-
-      Public Sub New(ByVal AsyncState As Object)
-        Me.m_AsyncState = AsyncState
-      End Sub
-
-      Public ReadOnly Property AsyncState As Object Implements IAsyncResult.AsyncState
-        Get
-          Return Me.m_AsyncState
-        End Get
-      End Property
-
-      Public ReadOnly Property AsyncWaitHandle As WaitHandle Implements IAsyncResult.AsyncWaitHandle
-        Get
-          Return Nothing
-        End Get
-      End Property
-
-      Public ReadOnly Property CompletedSynchronously As Boolean Implements IAsyncResult.CompletedSynchronously
-        Get
-          Return True
-        End Get
-      End Property
-
-      Public ReadOnly Property IsCompleted As Boolean Implements IAsyncResult.IsCompleted
-        Get
-          Return True
-        End Get
-      End Property
-    End Class
-
-#End Region
-
-    ''' <summary>
-    ''' Queries the URL without waiting for the response. The callback is invoked when the response is available.
-    ''' </summary>
-    ''' <param name="Key">Your key object.</param>
-    ''' <param name="URL">The query URL.</param>
-    ''' <param name="Callback">Address of callback method to deliver the response.</param>
-    ''' <returns>Returns an <c>System.IAsyncResult</c>.</returns>
-    ''' <remarks></remarks>
-    Public Shared Function QueryAndParseBegin(ByVal Key As Object,
-                                              ByVal URL As String,
-                                              ByVal Callback As AsyncCallback) As IAsyncResult
-      Dim Result As IAsyncResult
-      Dim Request As WebRequest
-
-      Try
-        Request = HttpWebRequest.Create(URL)
-
-        Result = Request.BeginGetResponse(Callback, New AsyncStateWithKey(Key, Request))
-      Catch iEx As Exception
-        Result = Callback.BeginInvoke(New StateAsyncResult(iEx), Nothing, Nothing)
-      End Try
-
-      Return Result
-    End Function
-
-    ''' <summary>
-    ''' Parses the <c>IAsyncResult</c>.
-    ''' </summary>
-    ''' <typeparam name="TItem">The YOURLS result type.</typeparam>
-    ''' <param name="Result">The <c>IAsyncResult</c> from the Callback.</param>
-    ''' <param name="Key">Your key object.</param>
-    ''' <param name="Response">Contains the parsed response if successful otherwise <c>Nothing</c>.</param>
-    ''' <returns>Return an <c>System.Exception</c> if an error occurred otherwise <c>Nothing</c>.</returns>
-    ''' <remarks></remarks>
-    Public Function QueryAndParseEnd(Of TItem As YourlsResult)(ByVal Result As IAsyncResult,
-                                                               <Out()> ByRef Key As Object,
-                                                               <Out()> ByRef Response As TItem) As Exception
-      Key = Nothing
-      Response = Nothing
-      Dim Ex As Exception = Nothing
-      Dim State As AsyncStateWithKey
-      Dim ResponseStream As Stream
-
-      If (Result Is Nothing) Then
-        Ex = New ArgumentNullException("Result")
-      Else
-        If (Not Result.IsCompleted) Then Call Result.AsyncWaitHandle.WaitOne()
-
-        State = TryCast(Result.AsyncState, AsyncStateWithKey)
-
-        If (State Is Nothing) Then
-          Ex = New Exception("Invalid AsyncState.")
-        Else
-          Try
-            Key = State.Key
-
-            If (State.Request Is Nothing) Then
-              Ex = New ArgumentNullException("Request")
-            Else
-              Dim WebResponse As WebResponse = State.Request.EndGetResponse(Result)
-              ResponseStream = WebResponse.GetResponseStream()
-
-              'Create Serilizer
-              Dim Serializer As New DataContractJsonSerializer(GetType(TItem))
-
-              'Deserialize
-              Response = DirectCast(Serializer.ReadObject(ResponseStream), TItem)
-
-              'Close stream
-              Call ResponseStream.Close()
-              Call ResponseStream.Dispose()
-
-              'Close response
-              Call WebResponse.Close()
-            End If
-          Catch iEx As WebException
-            Try
-              Dim WebEx As WebException = iEx
-
-              If (WebEx.Response IsNot Nothing) Then
-                ResponseStream = WebEx.Response.GetResponseStream()
-
-                'Create Serilizer
-                Dim Serializer As New DataContractJsonSerializer(GetType(TItem))
-
-                Response = DirectCast(Serializer.ReadObject(ResponseStream), TItem)
-
-                'Close stream
-                Call ResponseStream.Close()
-                Call ResponseStream.Dispose()
-
-                'Close response
-                Call WebEx.Response.Close()
-              End If
-
-              Ex = iEx
-            Catch iiEx As Exception
-              Ex = iiEx
-            End Try
-          Catch iEx As Exception
-            Ex = iEx
-          End Try
-        End If
-      End If
-
-      Return Ex
     End Function
   End Class
 End Namespace

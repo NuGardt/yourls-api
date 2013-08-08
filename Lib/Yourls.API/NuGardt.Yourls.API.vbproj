@@ -16,8 +16,7 @@
     <FileAlignment>512</FileAlignment>
     <MyType>Windows</MyType>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
-    <TargetFrameworkProfile>
-    </TargetFrameworkProfile>
+    <TargetFrameworkProfile>Client</TargetFrameworkProfile>
   </PropertyGroup>
   <PropertyGroup>
     <OptionExplicit>On</OptionExplicit>
@@ -78,7 +77,6 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Runtime.Serialization" />
-    <Reference Include="System.Web" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -110,15 +108,15 @@
     </Compile>
     <Compile Include="Yourls\API\IYourlsAuthentication.vb" />
     <Compile Include="Yourls\API\eYourlsFilter.vb" />
-    <Compile Include="Yourls\API\Result\DatabaseStats.vb" />
-    <Compile Include="Yourls\API\Result\Links.vb" />
-    <Compile Include="Yourls\API\Result\LinkData.vb" />
+    <Compile Include="Yourls\API\Result\Element\YourlsDatabaseStats.vb" />
+    <Compile Include="Yourls\API\Result\Element\YourlsLinks.vb" />
+    <Compile Include="Yourls\API\Result\Element\YourlsLinkData.vb" />
     <Compile Include="Yourls\API\Result\YourlsGetDatabaseStatsResult.vb" />
     <Compile Include="Yourls\API\Result\YourlsGetStatsResult.vb" />
     <Compile Include="Yourls\API\Result\YourlsGetUrlStatsResult.vb" />
     <Compile Include="Yourls\API\Result\YourlsExpandShortUrlResult.vb" />
-    <Compile Include="Yourls\API\Result\YourlsResult.vb" />
-    <Compile Include="Yourls\API\Result\UrlData.vb" />
+    <Compile Include="Yourls\API\Result\IYourlsBaseResult.vb" />
+    <Compile Include="Yourls\API\Result\Element\YourlsUrlData.vb" />
     <Compile Include="Yourls\API\YourlsAuthentication.vb" />
     <Compile Include="Yourls\API\YourlsService.vb" />
     <Compile Include="Yourls\API\Result\YourlsCreateShortUrlResult.vb" />
@@ -152,6 +150,12 @@
     <Content Include="NuGardt YOURLS API Readme.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\API.Helper.JSON\NuGardt.API.Helper.Json.vbproj">
+      <Project>{f437be50-a3cd-40cd-9fb1-d2069460024a}</Project>
+      <Name>NuGardt.API.Helper.Json</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <PropertyGroup>

@@ -16,26 +16,38 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 '
 Imports System.Runtime.Serialization
+Imports System.Text
 
-Namespace Yourls.API.Result
+Namespace Yourls.API.Result.Element
   ''' <summary>
   ''' Database Stats.
   ''' </summary>
   ''' <remarks></remarks>
   <DataContract()>
-  Public Class DatabaseStats
+  Public Class YourlsDatabaseStats
     ''' <summary>
     ''' Returns or sets the total number of link on the YOURLS server.
     ''' </summary>
     ''' <remarks></remarks>
     <DataMember(Name := "total_links")>
-    Public TotalLinks As Int32
+    Public TotalLinks As Int64
 
     ''' <summary>
     ''' Returns or sets the total number of clicks on the YOURLS server.
     ''' </summary>
     ''' <remarks></remarks>
     <DataMember(Name := "total_clicks")>
-    Public TotalClicks As Int32
+    Public TotalClicks As Int64
+
+    Public Overrides Function ToString() As String
+      Dim SB As New StringBuilder
+
+      With SB
+        Call .AppendFormat("Total Links: {0}{1}", Me.TotalLinks.ToString(), vbCrLf)
+        Call .AppendFormat("Total Clicks: {0}{1}", Me.TotalClicks.ToString(), vbCrLf)
+      End With
+
+      Return SB.ToString()
+    End Function
   End Class
 End Namespace

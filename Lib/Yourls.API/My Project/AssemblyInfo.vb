@@ -8,10 +8,10 @@ Imports System.Runtime.InteropServices
 
 ' Die Werte der Assemblyattribute überprüfen
 
-<Assembly: AssemblyTitle("Yourls.API")> 
+<Assembly: AssemblyTitle("NuGardt YOURLS.API")> 
 <Assembly: AssemblyDescription("")> 
 <Assembly: AssemblyCompany("NuGardt")> 
-<Assembly: AssemblyProduct("Yourls.API")> 
+<Assembly: AssemblyProduct("YOURLS.API")> 
 <Assembly: AssemblyCopyright("Copyright © NuGardt 2013")> 
 <Assembly: AssemblyTrademark("")> 
 
@@ -31,5 +31,5 @@ Imports System.Runtime.InteropServices
 ' übernehmen, indem Sie "*" eingeben:
 ' <Assembly: AssemblyVersion("1.0.*")> 
 
-<Assembly: AssemblyVersion("1.0.0.0")> 
-<Assembly: AssemblyFileVersion("1.0.0.0")> 
+<Assembly: AssemblyVersion("1.0.0.1")> 
+<Assembly: AssemblyFileVersion("1.0.0.1")> 

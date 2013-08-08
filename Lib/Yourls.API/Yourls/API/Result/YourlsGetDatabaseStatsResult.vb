@@ -16,6 +16,10 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 '
 Imports System.Runtime.Serialization
+Imports System.Net
+Imports NuGardt.API.Helper.JSON
+Imports NuGardt.Yourls.API.Result.Element
+Imports System.Text
 
 Namespace Yourls.API.Result
   ''' <summary>
@@ -24,7 +28,7 @@ Namespace Yourls.API.Result
   ''' <remarks></remarks>
   <DataContract()>
   Public Class YourlsGetDatabaseStatsResult
-    Inherits YourlsResult
+    Implements IYourlsBaseResult
 
     'SUCESS
     '{
@@ -49,6 +53,72 @@ Namespace Yourls.API.Result
     ''' </summary>
     ''' <remarks></remarks>
     <DataMember(Name := "db-stats")>
-    Public Stats As DatabaseStats
+    Public Stats As YourlsDatabaseStats
+
+#Region "IYourlsBaseResult"
+
+    ''' <summary>
+    ''' Returns or sets the message of the API call.
+    ''' </summary>
+    ''' <remarks></remarks>
+    <DataMember(Name := "message")>
+    Public Property Message As String Implements IYourlsBaseResult.Message
+
+    ''' <summary>
+    ''' Returns or sets the status code of the API call. 200 = OK
+    ''' </summary>
+    ''' <remarks></remarks>
+    <DataMember(Name := "statusCode")>
+    Public Property StatusCode As Integer Implements IYourlsBaseResult.StatusCode
+
+    ''' <summary>
+    ''' Returns or sets the error code of the API call.
+    ''' </summary>
+    ''' <remarks></remarks>
+    <DataMember(Name := "errorCode", EmitDefaultValue := False)>
+    Public Property ErrorCode As Integer Implements IYourlsBaseResult.ErrorCode
+
+    ''' <summary>
+    ''' Returns or sets the callback of the API call.
+    ''' </summary>
+    ''' <remarks></remarks>
+    <DataMember(Name := "callback", EmitDefaultValue := False)>
+    Public Property Callback As String Implements IYourlsBaseResult.Callback
+
+    <IgnoreDataMember()>
+    Public Property ResponseRaw As String Implements IBaseResult.ResponseRaw
+
+    <IgnoreDataMember()>
+    Private Property CacheExpires As Date? Implements IBaseResult.CacheExpires
+
+    Private Sub ReadHeader(Headers As WebHeaderCollection) Implements IBaseResult.ReadHeader
+      '-
+    End Sub
+
+    Public ReadOnly Property HasError As Boolean
+      Get
+        Return (Me.ErrorCode <> 0)
+      End Get
+    End Property
+
+    Public Function ToException() As Exception
+      If Me.HasError Then
+        Return New Exception(Me.Message)
+      Else
+        Return Nothing
+      End If
+    End Function
+
+#End Region
+
+    Public Overrides Function ToString() As String
+      Dim SB As New StringBuilder
+
+      With SB
+        If (Me.Stats IsNot Nothing) Then Call .AppendLine(Me.Stats.ToString())
+      End With
+
+      Return SB.ToString()
+    End Function
   End Class
 End Namespace

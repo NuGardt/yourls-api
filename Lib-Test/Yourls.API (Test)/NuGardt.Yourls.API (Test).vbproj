@@ -15,8 +15,7 @@
     <FileAlignment>512</FileAlignment>
     <MyType>Console</MyType>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
-    <TargetFrameworkProfile>
-    </TargetFrameworkProfile>
+    <TargetFrameworkProfile>Client</TargetFrameworkProfile>
   </PropertyGroup>
   <PropertyGroup>
     <OptionExplicit>On</OptionExplicit>
@@ -76,6 +75,12 @@
     </AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>Lib\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="NuGardt.UnitTest.Interface">
+      <HintPath>Lib\NuGardt.UnitTest.Interface.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Core" />
@@ -106,7 +111,19 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <Compile Include="Yourls\API\StartUp.vb" />
+    <Compile Include="Yourls\API\UnitTest\CreateShortUrl\CreateShortUrlBeginUnitTest.vb" />
+    <Compile Include="Yourls\API\UnitTest\CreateShortUrl\CreateShortUrlUnitTest.vb" />
+    <Compile Include="Yourls\API\UnitTest\ExpandShortUrl\ExpandShortUrlBeginUnitTest.vb" />
+    <Compile Include="Yourls\API\UnitTest\ExpandShortUrl\ExpandShortUrlUnitTest.vb" />
+    <Compile Include="Yourls\API\UnitTest\GetStats\GetStatsBeginUnitTest.vb" />
+    <Compile Include="Yourls\API\UnitTest\GetStats\GetStatsUnitTest.vb" />
+    <Compile Include="Yourls\API\UnitTest\GetUrlStats\GetUrlStatsBeginUnitTest.vb" />
+    <Compile Include="Yourls\API\UnitTest\GetUrlStats\GetUrlStatsUnitTest.vb" />
+    <Compile Include="Yourls\API\UnitTest\Helper.vb" />
+    <Compile Include="Yourls\API\UnitTest\StartUp.vb" />
+    <Compile Include="Yourls\API\UnitTest\GetDatabaseStats\GetDatabaseStatsBeginUnitTest.vb" />
+    <Compile Include="Yourls\API\UnitTest\GetDatabaseStats\GetDatabaseStatsUnitTest.vb" />
+    <Compile Include="Yourls\API\UnitTest\TraceListener.vb" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="My Project\Resources.resx">
@@ -129,9 +146,13 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Lib\Yourls.API\NuGardt.Yourls.API.vbproj">
+    <ProjectReference Include="..\..\Lib\API.Helper.JSON\NuGardt.API.Helper.Json.vbproj">
+      <Project>{f437be50-a3cd-40cd-9fb1-d2069460024a}</Project>
+      <Name>NuGardt.API.Helper.Json</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Lib\Yourls.API\NuGardt.YOURLS.API.vbproj">
       <Project>{7C0375E0-5A09-480A-BEBA-9B496670A796}</Project>
-      <Name>NuGardt.Yourls.API</Name>
+      <Name>NuGardt.YOURLS.API</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
