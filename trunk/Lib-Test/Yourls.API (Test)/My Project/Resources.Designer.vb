@@ -59,5 +59,41 @@ Namespace My.Resources
                 resourceCulture = value
             End Set
         End Property
+        
+        '''<summary>
+        '''  Sucht eine lokalisierte Zeichenfolge, die http://yourshortdomain.com/yourls-api.php ähnelt.
+        '''</summary>
+        Friend ReadOnly Property ApiUrl() As String
+            Get
+                Return ResourceManager.GetString("ApiUrl", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Sucht eine lokalisierte Zeichenfolge, die  ähnelt.
+        '''</summary>
+        Friend ReadOnly Property Password() As String
+            Get
+                Return ResourceManager.GetString("Password", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Sucht eine lokalisierte Zeichenfolge, die  ähnelt.
+        '''</summary>
+        Friend ReadOnly Property Signature() As String
+            Get
+                Return ResourceManager.GetString("Signature", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Sucht eine lokalisierte Zeichenfolge, die  ähnelt.
+        '''</summary>
+        Friend ReadOnly Property Username() As String
+            Get
+                Return ResourceManager.GetString("Username", resourceCulture)
+            End Get
+        End Property
     End Module
 End Namespace
